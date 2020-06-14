@@ -38,16 +38,25 @@ class Spreadsheet
         return $this->client->get($this->guid);
     }
 
+    /**
+     * @return Columns
+     */
     public function getColumns()
     {
         return new Columns($this->client, $this->guid);
     }
 
+    /**
+     * @return Rows
+     */
     public function getRows()
     {
         return new Rows($this->client, $this->guid);
     }
 
+    /**
+     * @return Cells
+     */
     public function getCells()
     {
         return new Cells($this->client, $this->guid);
@@ -107,5 +116,93 @@ class Spreadsheet
     public function resetFooters()
     {
         return $this->client->get($this->guid .'/footers/reset');
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function getStyle($cells)
+    {
+        return $this->client->get($this->guid .'/style/'. $cells);
+    }
+
+    /**
+     * @param array
+     * @return array
+     */
+    public function setStyle($style)
+    {
+        return $this->client->post($this->guid .'/style', $style);
+    }
+
+    /**
+     * @return array
+     */
+    public function resetStyle()
+    {
+        return $this->client->get($this->guid .'/style/reset');
+    }
+
+    /**
+     * @param string $cells
+     * @return array
+     */
+    public function getMerge($cells)
+    {
+        return $this->client->get($this->guid .'/merge/'. $cells);
+    }
+
+    /**
+     * @param string $cell
+     * @param int $colspan
+     * @param int $rowspan
+     * @return array
+     */
+    public function setMerge($cell, $colspan, $rowspan)
+    {
+        $merge = [
+            'cell' => $cell,
+            'colspan' => $colspan,
+            'rowspan' => $rowspan,
+        ];
+
+        return $this->client->post($this->guid .'/merge', $merge);
+    }
+
+    /**
+     * @param string $cell
+     * @return array
+     */
+    public function removeMerge($cell)
+    {
+        return $this->client->get($this->guid .'/merge/remove/'. $cell);
+    }
+
+    /**
+     * @return array
+     */
+    public function resetMerge()
+    {
+        return $this->client->get($this->guid .'/merge/reset');
+    }
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->client->get($this->guid .'/data/');
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function setData($data)
+    {
+        $data = [ 'data' => $data ];
+
+        return $this->client->post($this->guid .'/data/', $data);
     }
 }

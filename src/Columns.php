@@ -120,4 +120,16 @@ class Columns
 
         return $this->client->post($this->guid .'/type', $options);
     }
+
+    /**
+     * '' => todas as colunas
+     * '6' => coluna 6
+     * '0,6,7' => colunas 0, 6 e 7
+     * @param string $columnsIndex
+     * @return array
+     */
+    public function getData($columnsIndex)
+    {
+        return $this->client->get($this->guid .'/data/column/'. $columnsIndex);
+    }
 }

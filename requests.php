@@ -24,7 +24,7 @@ print_r($spreadsheet->getGuid()); // 09e152f4-1114-47db-a4b2-166b48ab33f6
 //print_r($spreadsheet->getConfig()); // show configs
 
 
-$spreadsheet = $jexcel->getSpreadsheet('4b4743d5-e5b0-47a9-93cd-a4144371bcbb');
+$spreadsheet = $jexcel->getSpreadsheet('c6050da0-3917-4e42-8d1d-224c951100df');
 
 // get widths
 //print_r($spreadsheet->getColumns()->getWidth()); // Array ( [0] => 253 [1] => 50 [2] => 50 [3] => 50 [4] => 50 [5] => 50 [6] => 205 [7] => 50 [8] => 50 [9] => 50 [10] => 50 [11] => 50 [12] => 149 [13] => 50 )
@@ -103,4 +103,37 @@ $spreadsheet = $jexcel->getSpreadsheet('4b4743d5-e5b0-47a9-93cd-a4144371bcbb');
 // get values
 //$spreadsheet->getCells()->getValues('A1');
 //$spreadsheet->getCells()->getValues('A1:C4');
-//$spreadsheet->getCells()->getValues('A1:C4');
+
+// set values
+//$spreadsheet->getCells()->setValues([
+//    ['row' => 1, 'data' => ['A2', 'B2', 'C2']],
+//    ['row' => 2, 'data' => ['A3', 'B3', 'C3']]
+//]);
+
+// get data
+//$spreadsheet->getData();
+//$spreadsheet->getColumns()->getData('1');
+//$spreadsheet->getRows()->getData('0,1');
+//$spreadsheet->getCells()->getData('A1:C3');
+
+// set data
+//$spreadsheet->setData([
+//    ['', '', ''],
+//    ['A2', 'B2', 'C2'],
+//    ['A3', 'B3', 'C3']
+//]);
+
+// style
+//$spreadsheet->getStyle('A2'); // Array ( [A2] => color:#E11E1C )
+//$spreadsheet->getStyle('A1,A2'); // Array ( [A1] => color:#E11E1C [A2] => color:#E11E1C )
+//$spreadsheet->getStyle('A1:C3'); // Array ( [A1] => color:#E11E1C [A2] => color:#E11E1C [C3] => color:#E11E1C )
+//$spreadsheet->setStyle(['A1' => 'background-color: #333;color:#fff;', 'A2' => 'background-color: #ccc']);
+//$spreadsheet->resetStyle();
+
+// set merge
+//$spreadsheet->setMerge('A1', 2, 2);
+//$spreadsheet->getMerge('A1'); // Array ( [A1] => Array ( [0] => 2 [1] => 2 ) )
+//$spreadsheet->getMerge('A1:D4'); // Array ( [A1] => Array ( [0] => 2 [1] => 2 ) [B4] => Array ( [0] => 2 [1] => 2 ) )
+//$spreadsheet->getMerge('A1,D4'); // Array ( [A1] => Array ( [0] => 2 [1] => 2 ) )
+//$spreadsheet->removeMerge('B4');
+print_r($spreadsheet->resetMerge());

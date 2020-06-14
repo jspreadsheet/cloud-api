@@ -100,4 +100,16 @@ class Rows
 
         return $this->client->post($this->guid .'/rows/delete', $options);
     }
+
+    /**
+     * '' => rows
+     * '6' => row 6
+     * '0,6,7' => row 0, 6 e 7
+     * @param string $rowsIndex
+     * @return array
+     */
+    public function getData($rowsIndex = '')
+    {
+        return $this->client->get($this->guid .'/data/row/'. $rowsIndex);
+    }
 }
