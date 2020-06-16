@@ -14,36 +14,49 @@ class Cells
     private $guid;
 
     /**
+     * @var string
+     */
+    private $indexes;
+
+    /**
      * Spreadsheet constructor.
      *
      * @param JexcelClient $client
      * @param string $guid
+     * @param string $indexes
      */
-    public function __construct($client, $guid)
+    public function __construct($client, $guid, $indexes)
     {
         $this->client = $client;
         $this->guid = $guid;
+        $this->indexes = $indexes;
     }
 
     /**
-     * '' => todos comentarios
-     * 'A1' =>
-     * 'A1,A2' =>
-     * 'A1:B2' =>
-     * @param string $cells
      * @return array
      */
-    public function getComments($cells = '')
+    public function getComments()
     {
-        return $this->client->get($this->guid .'/comments/'. $cells);
+        return $this->client->get($this->guid .'/comments/'. $this->indexes);
     }
 
     /**
-     * @param array $columns
+     * @param array $comments
      * @return array
      */
     public function setComments($comments)
     {
+        return $this->client->post($this->guid .'/comments/', $comments);
+    }
+
+    /**
+     * @param string $comment
+     * @return array
+     */
+    public function setComment($comment)
+    {
+        $comments = [$this->indexes => $comment];
+
         return $this->client->post($this->guid .'/comments/', $comments);
     }
 
@@ -53,24 +66,30 @@ class Cells
     }
 
     /**
-     * '' => todas
-     * 'A1' =>
-     * 'A1,A2' =>
-     * 'A1:B2' =>
-     * @param string $cells
      * @return array
      */
-    public function getMeta($cells = '')
+    public function getMetas()
     {
-        return $this->client->get($this->guid .'/meta/'. $cells);
+        return $this->client->get($this->guid .'/meta/'. $this->indexes);
     }
 
     /**
      * @param array $metas
      * @return array
      */
-    public function setMeta($metas)
+    public function setMetas($metas)
     {
+        return $this->client->post($this->guid .'/meta/', $metas);
+    }
+
+    /**
+     * @param array $meta
+     * @return array
+     */
+    public function setMeta($meta)
+    {
+        $metas = [$this->indexes => $meta];
+
         return $this->client->post($this->guid .'/meta/', $metas);
     }
 
@@ -80,44 +99,36 @@ class Cells
     }
 
     /**
-     * '' => type de todas as colunas
-     * '6' => type da coluna 6
-     * '0,6,7' => type das colunas 0, 6 e 7
-     * @param string $columnsIndex
      * @return array
      */
-    public function getType($columnsIndex = '')
+    public function getProperties()
     {
-        return $this->client->get($this->guid .'/type/'. $columnsIndex);
+        return $this->client->get($this->guid .'/cells/properties/'. $this->indexes);
     }
 
     /**
-     * @param int $columnsIndex
      * @param array $options
      * @return array
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function setType($columnsIndex, $options)
+    public function setProperties($options)
     {
-        $options = [
-            'column' => $columnsIndex,
-            'options' => $options,
-        ];
-
-        return $this->client->post($this->guid .'/type', $options);
+        return $this->client->post($this->guid .'/cells/properties/'. $this->indexes, $options);
     }
 
     /**
-     * '' =>
-     * 'A1' =>
-     * 'A1,A2' =>
-     * 'A1:B2' =>
-     * @param string $cells
      * @return array
      */
-    public function getValues($cells = '')
+    public function resetProperties()
     {
-        return $this->client->get($this->guid .'/value/'. $cells);
+        return $this->client->post($this->guid .'/cells/properties/reset/'. $this->indexes);
+    }
+
+    /**
+     * @return array
+     */
+    public function getValues()
+    {
+        return $this->client->get($this->guid .'/value/'. $this->indexes);
     }
 
     /**
@@ -130,15 +141,10 @@ class Cells
     }
 
     /**
-     * '' =>
-     * 'A1' =>
-     * 'A1,A2' =>
-     * 'A1:B2' =>
-     * @param string $cells
      * @return array
      */
-    public function getData($cells = '')
+    public function getData()
     {
-        return $this->client->get($this->guid .'/data/range/'. $cells);
+        return $this->client->get($this->guid .'/data/range/'. $this->indexes);
     }
 }

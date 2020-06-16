@@ -39,27 +39,69 @@ class Spreadsheet
     }
 
     /**
+     * @param array $indexes
      * @return Columns
      */
-    public function getColumns()
+    public function getColumns($indexes = null)
     {
-        return new Columns($this->client, $this->guid);
+        if (is_array($indexes)) {
+            $indexes = implode(',', $indexes);
+        }
+
+        return new Columns($this->client, $this->guid, $indexes);
+    }
+
+
+    /**
+     * @param int $index
+     * @return Columns
+     */
+    public function getColumn($index)
+    {
+        return new Columns($this->client, $this->guid, $index);
     }
 
     /**
+     * @param array $indexes
      * @return Rows
      */
-    public function getRows()
+    public function getRows($indexes = null)
     {
-        return new Rows($this->client, $this->guid);
+        if (is_array($indexes)) {
+            $indexes = implode(',', $indexes);
+        }
+
+        return new Rows($this->client, $this->guid, $indexes);
+    }
+
+    /**
+     * @param int $index
+     * @return Rows
+     */
+    public function getRow($index)
+    {
+        return new Rows($this->client, $this->guid, $index);
     }
 
     /**
      * @return Cells
      */
-    public function getCells()
+    public function getCells($indexes = null)
     {
-        return new Cells($this->client, $this->guid);
+        if (is_array($indexes)) {
+            $indexes = implode(',', $indexes);
+        }
+
+        return new Cells($this->client, $this->guid, $indexes);
+    }
+
+    /**
+     * @param string $index
+     * @return Cells
+     */
+    public function getCell($index)
+    {
+        return new Cells($this->client, $this->guid, $index);
     }
 
     /**
@@ -204,5 +246,19 @@ class Spreadsheet
         $data = [ 'data' => $data ];
 
         return $this->client->post($this->guid .'/data/', $data);
+    }
+
+    public function getWorksheet($index)
+    {
+        return new Worksheets($this->client, $this->guid .','. $index, $index);
+    }
+
+    /**
+     * @param array $configs
+     * @return array
+     */
+    public function createWorksheet($configs = null)
+    {
+        return $this->client->post($this->guid .'/worksheets/create/', $configs);
     }
 }
