@@ -2,7 +2,6 @@
 require 'vendor/autoload.php';
 
 use Jexcel\Jexcel;
-use Jexcel\Columns;
 
 $jexcel = new Jexcel();
 

@@ -1,5 +1,5 @@
 {
-    "name": "jexcel/client-api-php",
+    "name": "jexcel/client",
     "type": "library",
     "description": "Jexcel Cloud Client API Library",
     "keywords": [
