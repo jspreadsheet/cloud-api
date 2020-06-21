@@ -10,6 +10,11 @@ class Jexcel
     private $key;
 
     /**
+     * Address
+     */
+    private $url = 'http://web/api/';
+
+    /**
      * @var Jexcel Api Key
      */
     public $guid;
@@ -80,7 +85,8 @@ class Jexcel
             'Content-Type' => 'application/x-www-form-urlencoded'
         ];
 
-        $curl = curl_init('http://web/api/' . $url);
+        // URL
+        $curl = curl_init($this->url . $this->guid . '/' . $url);
 
         if ($method == 'POST') {
             curl_setopt($curl, CURLOPT_POST, true);
@@ -97,8 +103,6 @@ class Jexcel
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         $response = curl_exec($curl);
         curl_close($curl);
-
-        print_r($response);
 
         return $response;
     }
