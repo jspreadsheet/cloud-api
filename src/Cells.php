@@ -4,14 +4,9 @@ namespace Jexcel;
 class Cells
 {
     /**
-     * @var JexcelClient
+     * @var Jexcel instance
      */
     private $client;
-
-    /**
-     * @var string $guid
-     */
-    private $guid;
 
     /**
      * @var string
@@ -21,14 +16,16 @@ class Cells
     /**
      * Spreadsheet constructor.
      *
-     * @param JexcelClient $client
+     * @param Jexcel instance $client
      * @param string $guid
      * @param string $indexes
      */
-    public function __construct($client, $guid, $indexes)
+    public function __construct(Jexcel $client, $indexes)
     {
+        // Jexcel instance
         $this->client = $client;
-        $this->guid = $guid;
+
+        // Indexes
         $this->indexes = $indexes;
     }
 
@@ -37,7 +34,7 @@ class Cells
      */
     public function getComments()
     {
-        return $this->client->get($this->guid .'/comments/'. $this->indexes);
+        return $this->client->get('comments/'. $this->indexes);
     }
 
     /**
@@ -46,7 +43,7 @@ class Cells
      */
     public function setComments($comments)
     {
-        return $this->client->post($this->guid .'/comments/', $comments);
+        return $this->client->post('comments/', $comments);
     }
 
     /**
@@ -57,12 +54,12 @@ class Cells
     {
         $comments = [$this->indexes => $comment];
 
-        return $this->client->post($this->guid .'/comments/', $comments);
+        return $this->client->post('comments/', $comments);
     }
 
     public function resetComments()
     {
-        return $this->client->get($this->guid .'/comments/reset');
+        return $this->client->get('comments/reset');
     }
 
     /**
@@ -70,7 +67,7 @@ class Cells
      */
     public function getMetas()
     {
-        return $this->client->get($this->guid .'/meta/'. $this->indexes);
+        return $this->client->get('meta/'. $this->indexes);
     }
 
     /**
@@ -79,7 +76,7 @@ class Cells
      */
     public function setMetas($metas)
     {
-        return $this->client->post($this->guid .'/meta/', $metas);
+        return $this->client->post('meta/', $metas);
     }
 
     /**
@@ -90,12 +87,12 @@ class Cells
     {
         $metas = [$this->indexes => $meta];
 
-        return $this->client->post($this->guid .'/meta/', $metas);
+        return $this->client->post('meta/', $metas);
     }
 
     public function resetMeta()
     {
-        return $this->client->get($this->guid .'/meta/reset');
+        return $this->client->get('meta/reset');
     }
 
     /**
@@ -103,7 +100,7 @@ class Cells
      */
     public function getProperties()
     {
-        return $this->client->get($this->guid .'/cells/properties/'. $this->indexes);
+        return $this->client->get('cells/properties/'. $this->indexes);
     }
 
     /**
@@ -112,7 +109,7 @@ class Cells
      */
     public function setProperties($options)
     {
-        return $this->client->post($this->guid .'/cells/properties/'. $this->indexes, $options);
+        return $this->client->post('cells/properties/'. $this->indexes, $options);
     }
 
     /**
@@ -120,7 +117,7 @@ class Cells
      */
     public function resetProperties()
     {
-        return $this->client->post($this->guid .'/cells/properties/reset/'. $this->indexes);
+        return $this->client->post('cells/properties/reset/'. $this->indexes);
     }
 
     /**
@@ -128,7 +125,7 @@ class Cells
      */
     public function getValues()
     {
-        return $this->client->get($this->guid .'/value/'. $this->indexes);
+        return $this->client->get('value/'. $this->indexes);
     }
 
     /**
@@ -137,7 +134,7 @@ class Cells
      */
     public function setValues($values)
     {
-        return $this->client->post($this->guid .'/value/', $values);
+        return $this->client->post('value/', $values);
     }
 
     /**
@@ -145,6 +142,6 @@ class Cells
      */
     public function getData()
     {
-        return $this->client->get($this->guid .'/data/range/'. $this->indexes);
+        return $this->client->get('data/range/'. $this->indexes);
     }
 }

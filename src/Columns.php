@@ -7,14 +7,9 @@ class Columns
     const ASC = 0;
 
     /**
-     * @var JexcelClient
+     * @var Jexcel instance
      */
     private $client;
-
-    /**
-     * @var string $guid
-     */
-    private $guid;
 
     /**
      * @var string|int
@@ -24,14 +19,16 @@ class Columns
     /**
      * Spreadsheet constructor.
      *
-     * @param JexcelClient $client
+     * @param Jexcel instance $client
      * @param string $guid
      * @param string|int $indexes
      */
-    public function __construct($client, $guid, $indexes = null)
+    public function __construct($client,$indexes = null)
     {
+        // Jexcel instance
         $this->client = $client;
-        $this->guid = $guid;
+
+        // Indexes
         $this->indexes = $indexes;
     }
 
@@ -40,7 +37,7 @@ class Columns
      */
     public function getWidth()
     {
-        return $this->client->get($this->guid .'/width/'. $this->indexes);
+        return $this->client->get('width/'. $this->indexes);
     }
 
     /**
@@ -49,7 +46,7 @@ class Columns
      */
     public function setWidth($width = 50)
     {
-        return $this->client->post($this->guid .'/width/'. $this->indexes .'/'. $width);
+        return $this->client->post('width/'. $this->indexes .'/'. $width);
     }
 
     /**
@@ -68,7 +65,7 @@ class Columns
             'data' => $data
         ];
 
-        return $this->client->post($this->guid .'/columns/insert', $options);
+        return $this->client->post('columns/insert', $options);
     }
 
     /**
@@ -77,7 +74,7 @@ class Columns
      */
     public function moveTo($index)
     {
-        return $this->client->post($this->guid .'/columns/move/'. $this->indexes .','. $index);
+        return $this->client->post('columns/move/'. $this->indexes .','. $index);
     }
 
     /**
@@ -91,7 +88,7 @@ class Columns
             'numOfColumns' => $numOfColumns,
         ];
 
-        return $this->client->post($this->guid .'/columns/delete', $options);
+        return $this->client->post('columns/delete', $options);
     }
 
     /**
@@ -99,7 +96,7 @@ class Columns
      */
     public function getProperties()
     {
-        return $this->client->get($this->guid .'/type/'. $this->indexes);
+        return $this->client->get('properties/'. $this->indexes);
     }
 
     /**
@@ -113,7 +110,7 @@ class Columns
             'options' => $options,
         ];
 
-        return $this->client->post($this->guid .'/type', $options);
+        return $this->client->post('properties', $options);
     }
 
     /**
@@ -121,7 +118,7 @@ class Columns
      */
     public function getData()
     {
-        return $this->client->get($this->guid .'/data/column/'. $this->indexes);
+        return $this->client->get('data/column/'. $this->indexes);
     }
 
     /**
@@ -130,6 +127,6 @@ class Columns
      */
     public function orderBy($direction)
     {
-        return $this->client->post($this->guid .'/columns/order/'. $this->indexes .'/'. $direction);
+        return $this->client->post('columns/order/'. $this->indexes .'/'. $direction);
     }
 }

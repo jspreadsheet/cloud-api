@@ -4,15 +4,9 @@ namespace Jexcel;
 class Rows
 {
     /**
-     * @var JexcelClient
+     * @var Jexcel instance
      */
     private $client;
-
-    /**
-     * @var string $guid
-     */
-    private $guid;
-
     /**
      * @var string|int
      */
@@ -21,14 +15,16 @@ class Rows
     /**
      * Spreadsheet constructor.
      *
-     * @param JexcelClient $client
+     * @param Jexcel $client
      * @param string $guid
      * @param string|int $indexes
      */
-    public function __construct($client, $guid, $indexes = null)
+    public function __construct($client, $indexes = null)
     {
+        // Jexcel controller
         $this->client = $client;
-        $this->guid = $guid;
+
+        // Row numbers
         $this->indexes = $indexes;
     }
 
@@ -37,12 +33,12 @@ class Rows
      */
     public function getHeight()
     {
-        return $this->client->get($this->guid .'/height/'. $this->indexes);
+        return $this->client->get('height/'. $this->indexes);
     }
 
     public function setHeight($height)
     {
-        return $this->client->post($this->guid .'/height/'. $this->indexes .'/'. $height);
+        return $this->client->post('height/'. $this->indexes .'/'. $height);
     }
 
     /**
@@ -75,7 +71,7 @@ class Rows
             $options['data'] = $rows;
         }
 
-        return $this->client->post($this->guid .'/rows/insert', $options);
+        return $this->client->post('rows/insert', $options);
     }
 
     /**
@@ -84,7 +80,7 @@ class Rows
      */
     public function moveTo($to)
     {
-        return $this->client->post($this->guid .'/rows/move/'. $this->indexes .','. $to);
+        return $this->client->post('rows/move/'. $this->indexes .','. $to);
     }
 
     /**
@@ -98,7 +94,7 @@ class Rows
             'numOfRows' => $numOfRows,
         ];
 
-        return $this->client->post($this->guid .'/rows/delete', $options);
+        return $this->client->post('rows/delete', $options);
     }
 
     /**
@@ -106,6 +102,6 @@ class Rows
      */
     public function getData()
     {
-        return $this->client->get($this->guid .'/data/row/'. $this->indexes);
+        return $this->client->get('data/row/'. $this->indexes);
     }
 }

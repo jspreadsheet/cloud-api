@@ -4,55 +4,36 @@ namespace Jexcel;
 class Worksheets
 {
     /**
-     * @var JexcelClient
+     * @var int
      */
     private $client;
 
     /**
-     * @var string $guid
-     */
-    private $guid;
-
-    /**
-     * @var int
-     */
-    private $index;
-
-    /**
      * Spreadsheet constructor.
      *
-     * @param JexcelClient $client
-     * @param string $guid
-     * @param string|int $index
+     * @param Jexcel instance
      */
-    public function __construct($client, $guid, $index = null)
+    public function __construct(Jexcel $jexcel, $index = 0)
     {
-        $this->client = $client;
-        $this->guid = $guid;
-        $this->index = $index;
-    }
+        // Jexcel instance
+        $this->client = $jexcel;
 
-    /**
-     * @param array $configs
-     * @return array
-     */
-    public function create($configs = null)
-    {
-        return $this->client->post($this->guid .'/worksheets/create/', $configs);
+        // Worksheet
+        $this->index = $index;
     }
 
     /**
      * @param string $newName
      * @return array
      */
-    public function rename($newName)
+    public function rename($name)
     {
         $data = [
             'worksheet' => $this->index,
-            'newValue' => $newName
+            'name' => $name
         ];
 
-        return $this->client->post($this->guid .'/worksheets/rename/', $data);
+        return $this->client->post('worksheets/rename', $data);
     }
 
     /**
@@ -60,7 +41,7 @@ class Worksheets
      */
     public function delete()
     {
-        return $this->client->post($this->guid .'/worksheets/delete/'. $this->index);
+        return $this->client->post('worksheets/delete/' . $this->index);
     }
 
     /**
@@ -69,9 +50,6 @@ class Worksheets
      */
     public function moveTo($index)
     {
-        $guid = explode(',', $this->guid);
-        $guid = $guid[0];
-
-        return $this->client->post($guid .'/worksheets/move/'. $this->index .','. $index);
+        return $this->client->post('worksheets/move/' . $this->client->guid . ',' . $index);
     }
 }

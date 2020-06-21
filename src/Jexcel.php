@@ -1,46 +1,28 @@
 <?php
-namespace Jexcel;
 
-use GuzzleHttp\Exception\GuzzleException;
+namespace jexcel;
 
 class Jexcel
 {
     /**
-     * @var JexcelClient
+     * @var Jexcel Api Key
      */
-    private $client;
+    private $key;
+
+    /**
+     * @var Jexcel Api Key
+     */
+    public $guid;
 
     /**
      * Jexcel constructor.
      */
-    public function __construct()
+    public function __construct($key = null)
     {
-        $this->client = new JexcelClient(/* tokens */);
-    }
-
-    /**
-     * describe options here
-     * minDimensions [num of rows, num of columns]
-     * @param $options
-     * @return Spreadsheet
-     * @throws GuzzleException
-     */
-    public function create($options = null)
-    {
-        if ($options) {
-            $options = ['data' => json_encode($options)];
-        }
-
-        try {
-            $result = $this->client->post('create', $options);
-
-            if (isset($result['success'])) {
-                return new Spreadsheet($this->client, $result['token']);
-            }
-
-            throw new \Exception('Error on create spreadsheet');
-        } catch (\Exception $exception) {
-            throw new $exception;
+        if (! $key) {
+            return 'API Key not defined';
+        } else {
+            $this->key = $key;
         }
     }
 
@@ -55,6 +37,69 @@ class Jexcel
             $guid .= ','. $tab;
         }
 
-        return new Spreadsheet($this->client, $guid);
+        $this->guid = $guid;
+
+        return new Spreadsheet($this);
+    }
+
+
+    /**
+     * @param string $uri
+     * @return array
+     */
+    public function get($url)
+    {
+        $content = $this->request('GET', $url);
+
+        return json_decode($content, true);
+    }
+
+    /**
+     * @param string $uri
+     * @param array $options
+     * @return array
+     */
+    public function post($url, $options = null)
+    {
+        $content = $this->request('POST', $url, $options);
+
+        return json_decode($content, true);
+    }
+
+    /**
+     * Final HTTP request
+     * @param string $url
+     * @param array $data
+     * @return array
+     */
+    public function request($method, $url, $data = null)
+    {
+        $headers = [
+            'Accept: text/json',
+            'Authorization: Bearer ' . $this->key,
+            'Content-Type' => 'application/x-www-form-urlencoded'
+        ];
+
+        $curl = curl_init('http://web/api/' . $url);
+
+        if ($method == 'POST') {
+            curl_setopt($curl, CURLOPT_POST, true);
+        }
+
+        if ($data) {
+            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+        }
+
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_VERBOSE, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        print_r($response);
+
+        return $response;
     }
 }
