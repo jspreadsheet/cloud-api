@@ -1,5 +1,5 @@
 <?php
-namespace Jexcel;
+namespace jexcel;
 
 class Cells
 {

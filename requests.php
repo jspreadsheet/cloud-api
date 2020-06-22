@@ -1,7 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 
-use Jexcel\Jexcel;
+use jexcel\Jexcel;
 
 $jexcel = new Jexcel();
 

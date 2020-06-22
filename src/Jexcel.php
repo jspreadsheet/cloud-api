@@ -1,5 +1,4 @@
 <?php
-
 namespace jexcel;
 
 class Jexcel

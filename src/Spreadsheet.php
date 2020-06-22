@@ -1,6 +1,5 @@
 <?php
-
-namespace Jexcel;
+namespace jexcel;
 
 class Spreadsheet
 {
