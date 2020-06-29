@@ -9,7 +9,11 @@ trait Merge
      */
     public function getMerge($cells)
     {
-        return $this->client->get('/merge/'. $cells);
+        if (is_array($cells)) {
+            $cells = implode(',', $cells);
+        }
+
+        return $this->client->get('merge/'. $cells);
     }
 
     /**

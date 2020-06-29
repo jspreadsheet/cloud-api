@@ -20,6 +20,9 @@ class Spreadsheet
         $this->client = $jexcel;
     }
 
+    /**
+     * @return array
+     */
     public function getConfig()
     {
         return $this->client->get('config');

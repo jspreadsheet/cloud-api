@@ -8,7 +8,7 @@ trait Footers
      */
     public function getFooters()
     {
-        return $this->client->get($this->client->guid .'/footers/');
+        return $this->client->get('footers');
     }
 
     /**
