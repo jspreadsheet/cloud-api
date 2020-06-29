@@ -26,6 +26,6 @@ trait Style
      */
     public function resetStyle()
     {
-        return $this->client->post('style/reset');
+        return $this->client->get('style/reset');
     }
 }
