@@ -21,6 +21,14 @@ class Spreadsheet
     }
 
     /**
+     * @param int $tab
+     */
+    public function setActiveWorksheet($tab)
+    {
+        $this->client->setActiveWorksheet($tab);
+    }
+
+    /**
      * @return array
      */
     public function getConfig()

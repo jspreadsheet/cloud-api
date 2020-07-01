@@ -46,6 +46,14 @@ class Jexcel
         return new Spreadsheet($this);
     }
 
+    public function setActiveWorksheet($tab)
+    {
+        $guid = explode(',', $this->guid);
+
+        $guid[1] = (int) $tab;
+
+        $this->guid = implode(',', $guid);
+    }
 
     /**
      * @param string $uri
