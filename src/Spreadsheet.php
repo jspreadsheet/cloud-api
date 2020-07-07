@@ -5,6 +5,10 @@ class Spreadsheet
 {
     use Merge, Style, Footers, Headers;
 
+    const USER_LEVEL_VIEWER = 1;
+    const USER_LEVEL_EDITOR = 2;
+    const USER_LEVEL_DESIGNER = 3;
+
     /**
      * @var Jexcel
      */
@@ -116,5 +120,99 @@ class Spreadsheet
     public function createWorksheet($configs = null)
     {
         return $this->client->post('worksheets/create/', $configs);
+    }
+
+    /**
+     * @return array
+     */
+    public function getUsers()
+    {
+        return $this->client->get('users');
+    }
+
+    /**
+     * @param string $email
+     * @param int $level
+     * @param bool $notification
+     * @return array
+     */
+    public function addUser($email, $level, $notification = false)
+    {
+        $users = [
+            [
+                'email' => $email,
+                'level' => $level,
+            ]
+        ];
+
+        return $this->addUsers($users, $notification);
+    }
+
+    /**
+     * $users = [
+     *   [
+     *     'email' => $email,
+     *     'level' => $level
+     *   ]
+     * ];
+     *
+     * @param array $users
+     * @param bool $notification
+     * @return array
+     */
+    public function addUsers($users, $notification = false)
+    {
+        return $this->client->post('users/', ['data' => $users, 'notification' => $notification]);
+    }
+
+    /**
+     * @param string $userEmail
+     * @param int $level
+     * @return array
+     */
+    public function updateUser($userEmail, $level)
+    {
+        $users = [
+            [ $userEmail, $level ]
+        ];
+
+        return $this->updateUsers($users);
+    }
+
+    /**
+     * $users = [
+     *   [ $email, $level ]
+     * ];
+     *
+     * @param array $users
+     * @return array
+     */
+    public function updateUsers($users)
+    {
+        return $this->client->post('users/update', ['data' => $users]);
+    }
+
+    /**
+     * @param string $userEmail
+     * @return array
+     */
+    public function deleteUser($userEmail)
+    {
+        $emails = [ $userEmail ];
+
+        return $this->deleteUsers($emails);
+    }
+
+    /**
+     * $users = [
+     *   [ $email ]
+     * ];
+     *
+     * @param array $userEmails
+     * @return array
+     */
+    public function deleteUsers($userEmails)
+    {
+        return $this->client->post('users/delete', ['data' => $userEmails]);
     }
 }

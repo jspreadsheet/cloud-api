@@ -58,8 +58,8 @@ class Columns
     public function insert($insertBefore, $properties, $data = null)
     {
         $options = [
-            'columnNumber' => $this->indexes,
             'numOfColumns' => count($properties),
+            'columnNumber' => $this->indexes,
             'insertBefore' => $insertBefore,
             'properties' => $properties,
             'data' => $data

@@ -57,12 +57,10 @@ class Cells
         return $this->client->post('comments/', $comments);
     }
 
-    /*
     public function resetComments()
     {
         return $this->client->get('comments/reset');
     }
-    */
 
     /**
      * @return array

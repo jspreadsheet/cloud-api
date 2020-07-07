@@ -4,11 +4,15 @@ namespace jexcel;
 trait Style
 {
     /**
-     *
+     * @param string|array $cells
      * @return array
      */
     public function getStyle($cells)
     {
+        if (is_array($cells)) {
+            $cells = implode(',', $cells);
+        }
+
         return $this->client->get('style/'. $cells);
     }
 
@@ -22,10 +26,15 @@ trait Style
     }
 
     /**
+     * @param string|array $cells
      * @return array
      */
-    public function resetStyle()
+    public function resetStyle($cells)
     {
-        return $this->client->get('style/reset');
+        if (is_array($cells)) {
+            $cells = implode(',', $cells);
+        }
+
+        return $this->client->get('style/reset/'. $cells);
     }
 }

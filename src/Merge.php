@@ -4,7 +4,7 @@ namespace jexcel;
 trait Merge
 {
     /**
-     * @param string $cells
+     * @param string|array $cells
      * @return array
      */
     public function getMerge($cells)
