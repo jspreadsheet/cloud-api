@@ -129,12 +129,21 @@ class Cells
     }
 
     /**
-     * @param array $values
+     * @param mixed $value
      * @return array
      */
-    public function setValues($values)
+    public function setValue($value)
     {
-        return $this->client->post('value/', $values);
+        $data = [];
+        $indexes = Ident::requestedCells($this->indexes);
+
+        foreach ($indexes as $index) {
+            $index = Ident::getIdFromColumnName($index);
+
+            $data[] = ['x' => $index[0], 'y' => $index[1], 'value' => $value];
+        }
+
+        return $this->client->post('value/', $data);
     }
 
     /**

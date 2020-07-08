@@ -215,4 +215,18 @@ class Spreadsheet
     {
         return $this->client->post('users/delete', ['data' => $userEmails]);
     }
+
+    /**
+     * $values = [
+     *   ['x' => 0, 'y' => 0, 'value' => 'value A1'],
+     *   ['x' => 0, 'y' => 1, 'value' => 'value A2']
+     * ]
+     *
+     * @param $values
+     * @return array
+     */
+    public function setValues($values)
+    {
+        return $this->client->post('value/', $values);
+    }
 }
