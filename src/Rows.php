@@ -51,25 +51,12 @@ class Rows
         $options = [];
 
         if (isset($this->indexes) && $this->indexes >= 0) {
-            $dataRows = [];
-            $rowIndex = $this->indexes;
-
-            foreach ($rows as $row) {
-                $dataRows[] = [
-                    'row' => $rowIndex,
-                    'data' => $row
-                ];
-
-                $rowIndex++;
-            }
-
             $options['rowNumber'] = $this->indexes;
             $options['numOfRows'] = count($rows);
             $options['insertBefore'] = $insertBefore;
-            $options['data'] = $dataRows;
-        } else {
-            $options['data'] = $rows;
         }
+
+        $options['data'] = $rows;
 
         return $this->client->post('rows/insert', $options);
     }

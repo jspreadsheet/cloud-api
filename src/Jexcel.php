@@ -4,6 +4,12 @@ namespace jexcel;
 class Jexcel
 {
     /**
+     * Debug mode
+     * @var string
+     */
+    public $debug = true;
+
+    /**
      * @var Jexcel Api Key
      */
     private $key;
@@ -103,13 +109,31 @@ class Jexcel
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
         }
 
+        if ($this->debug == true) {
+            curl_setopt($curl, CURLOPT_VERBOSE, true);
+        }
+
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLOPT_VERBOSE, true);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+
+        if ($this->debug == true) {
+            echo '<pre>';
+            print_r(curl_error($curl));
+            print_r(curl_getinfo($curl));
+        }
+
         $response = curl_exec($curl);
+
+        if ($this->debug == true) {
+            echo $response;
+        }
+
         curl_close($curl);
+
+
 
         return $response;
     }
