@@ -48,6 +48,14 @@ class Rows
      */
     public function insert($rows, $insertBefore = null)
     {
+        if (! $rows) {
+            return [];
+        }
+
+        if (! isset($rows[0]) || ! is_array($rows)) {
+            $rows = [ $rows ];
+        }
+
         $options = [];
 
         if (isset($this->indexes) && $this->indexes >= 0) {

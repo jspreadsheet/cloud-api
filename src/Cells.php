@@ -65,18 +65,9 @@ class Cells
     /**
      * @return array
      */
-    public function getMetas()
+    public function getMeta()
     {
         return $this->client->get('meta/'. $this->indexes);
-    }
-
-    /**
-     * @param array $metas
-     * @return array
-     */
-    public function setMetas($metas)
-    {
-        return $this->client->post('meta/', $metas);
     }
 
     /**
@@ -85,9 +76,12 @@ class Cells
      */
     public function setMeta($meta)
     {
-        $metas = [$this->indexes => $meta];
+        // If $meta is not multidimensional: $meta = ['X999' => $meta]
+        if (count($meta) == count($meta, COUNT_RECURSIVE)) {
+            $meta = [$this->indexes => $meta];
+        }
 
-        return $this->client->post('meta/', $metas);
+        return $this->client->post('meta/', $meta);
     }
 
     public function resetMeta()
