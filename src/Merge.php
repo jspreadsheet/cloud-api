@@ -17,17 +17,19 @@ trait Merge
     }
 
     /**
-     * @param string $cell
-     * @param int $colspan
-     * @param int $rowspan
+     * @param $cell
+     * @param $colspan
+     * @param $rowspan
+     * @param bool $force
      * @return array
      */
-    public function setMerge($cell, $colspan, $rowspan)
+    public function setMerge($cell, $colspan, $rowspan, $force = false)
     {
         $merge = [
             'cell' => $cell,
             'colspan' => $colspan,
             'rowspan' => $rowspan,
+            'force' => $force
         ];
 
         return $this->client->post('merge', $merge);
