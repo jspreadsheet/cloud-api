@@ -17,7 +17,7 @@ class Jexcel
     /**
      * Address
      */
-    private $url = 'http://web/api/';
+    private $url = 'https://jexcel.net/api/';
 
     /**
      * @var Jexcel Api Key
