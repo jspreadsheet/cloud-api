@@ -7,7 +7,7 @@ class Jexcel
      * Debug mode
      * @var string
      */
-    public $debug = true;
+    public $debug = false;
 
     /**
      * @var Jexcel Api Key
