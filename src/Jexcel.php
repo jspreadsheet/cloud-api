@@ -3,6 +3,8 @@ namespace jexcel;
 
 class Jexcel
 {
+    use License;
+
     /**
      * Debug mode
      * @var string
@@ -98,8 +100,15 @@ class Jexcel
             'Content-Type' => 'application/x-www-form-urlencoded'
         ];
 
+        // Destination URL
+        $request = $this->url;
+        if ($this->guid) {
+            $request .= $this->guid . '/';
+        }
+        $request .= $url;
+
         // URL
-        $curl = curl_init($this->url . $this->guid . '/' . $url);
+        $curl = curl_init($request);
 
         if ($method == 'POST') {
             curl_setopt($curl, CURLOPT_POST, true);
