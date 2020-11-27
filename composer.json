@@ -11,9 +11,9 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Paul Hodel",
-            "email": "paul@jexcel.net",
-            "homepage": "https://github.com/paulhodel"
+            "name": "Jexcel",
+            "email": "contact@jexcel.net",
+            "homepage": "https://jexcel.net"
         }
     ],
     "autoload": {
