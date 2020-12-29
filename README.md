@@ -1,5 +1,4 @@
 # client
-Jexcel Cloud Client API
-
+Cloud Client API
 
 https://jexcel.net
