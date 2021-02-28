@@ -1,4 +1,4 @@
 # client
 Cloud Client API
 
-https://jspreadsheet.com
+https://jspreadsheet.com/cloud/docs
