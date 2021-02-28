@@ -1,5 +1,5 @@
 <?php
-namespace jexcel;
+namespace jspreadsheet;
 
 trait Footers
 {

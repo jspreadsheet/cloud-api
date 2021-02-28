@@ -1,5 +1,5 @@
 <?php
-namespace jexcel;
+namespace jspreadsheet;
 
 class Columns
 {
@@ -7,7 +7,7 @@ class Columns
     const ASC = 0;
 
     /**
-     * @var Jexcel instance
+     * @var Jspreadsheet instance
      */
     private $client;
 
@@ -19,13 +19,13 @@ class Columns
     /**
      * Spreadsheet constructor.
      *
-     * @param Jexcel instance $client
+     * @param Jspreadsheet instance $client
      * @param string $guid
      * @param string|int $indexes
      */
-    public function __construct($client,$indexes = null)
+    public function __construct($client, $indexes = null)
     {
-        // Jexcel instance
+        // Jspreadsheet instance
         $this->client = $client;
 
         // Indexes

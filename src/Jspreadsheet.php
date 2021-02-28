@@ -1,7 +1,7 @@
 <?php
-namespace jexcel;
+namespace jspreadsheet;
 
-class Jexcel
+class Jspreadsheet
 {
     use License;
 
@@ -12,22 +12,22 @@ class Jexcel
     public $debug = false;
 
     /**
-     * @var Jexcel Api Key
+     * @var Jspreadsheet Api Key
      */
     private $key;
 
     /**
      * Address
      */
-    private $url = 'https://jexcel.net/api/';
+    private $url = 'https://jspreadsheet.com/api/';
 
     /**
-     * @var Jexcel Api Key
+     * @var Jspreadsheet Api Key
      */
     public $guid;
 
     /**
-     * Jexcel constructor.
+     * Jspreadsheet constructor.
      */
     public function __construct($key = null)
     {

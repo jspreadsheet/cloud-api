@@ -1,10 +1,10 @@
 <?php
-namespace jexcel;
+namespace jspreadsheet;
 
 class Cells
 {
     /**
-     * @var Jexcel instance
+     * @var Jspreadsheet instance
      */
     private $client;
 
@@ -16,13 +16,13 @@ class Cells
     /**
      * Spreadsheet constructor.
      *
-     * @param Jexcel instance $client
+     * @param Jspreadsheet instance $client
      * @param string $guid
      * @param string $indexes
      */
-    public function __construct(Jexcel $client, $indexes)
+    public function __construct(Jspreadsheet $client, $indexes)
     {
-        // Jexcel instance
+        // Jspreadsheet instance
         $this->client = $client;
 
         // Indexes

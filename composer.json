@@ -3,8 +3,9 @@
     "type": "library",
     "description": "Jspreadsheet Cloud Client API Library",
     "keywords": [
+        "jspreadsheet",
+        "jspreadsheet cloud",
         "jexcel",
-        "jexcel cloud",
         "spreadsheets"
     ],
     "homepage": "https://jspreadsheet.com/",

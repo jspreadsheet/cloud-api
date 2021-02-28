@@ -1,5 +1,5 @@
 <?php
-namespace jexcel;
+namespace jspreadsheet;
 
 class Worksheets
 {
@@ -11,12 +11,12 @@ class Worksheets
     /**
      * Spreadsheet constructor.
      *
-     * @param Jexcel instance
+     * @param Jspreadsheet instance
      */
-    public function __construct(Jexcel $jexcel, $index = 0)
+    public function __construct(Jspreadsheet $j, $index = 0)
     {
-        // Jexcel instance
-        $this->client = $jexcel;
+        // Jspreadsheet instance
+        $this->client = $j;
 
         // Worksheet
         $this->index = $index;

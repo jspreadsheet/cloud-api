@@ -1,10 +1,10 @@
 <?php
-namespace jexcel;
+namespace jspreadsheet;
 
 class Rows
 {
     /**
-     * @var Jexcel instance
+     * @var Jspreadsheet instance
      */
     private $client;
     /**
@@ -15,13 +15,13 @@ class Rows
     /**
      * Spreadsheet constructor.
      *
-     * @param Jexcel $client
+     * @param Jspreadsheet $client
      * @param string $guid
      * @param string|int $indexes
      */
     public function __construct($client, $indexes = null)
     {
-        // Jexcel controller
+        // Jspreadsheet controller
         $this->client = $client;
 
         // Row numbers

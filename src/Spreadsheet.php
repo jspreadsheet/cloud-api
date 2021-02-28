@@ -1,5 +1,5 @@
 <?php
-namespace jexcel;
+namespace jspreadsheet;
 
 class Spreadsheet
 {
@@ -10,18 +10,18 @@ class Spreadsheet
     const USER_LEVEL_DESIGNER = 3;
 
     /**
-     * @var Jexcel
+     * @var Jspreadsheet
      */
     private $client;
 
     /**
      * Spreadsheet constructor.
      *
-     * @param Jexcel controller
+     * @param Jspreadsheet controller
      */
-    public function __construct(Jexcel $jexcel)
+    public function __construct(Jspreadsheet $j)
     {
-        $this->client = $jexcel;
+        $this->client = $j;
     }
 
     /**

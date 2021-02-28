@@ -1,5 +1,5 @@
 <?php
-namespace jexcel;
+namespace jspreadsheet;
 
 class Ident
 {
@@ -45,7 +45,7 @@ class Ident
                 $code += (ord($t[0][0][$i]) - 64) * pow(26, (strlen($t[0][0]) - 1 - $i));
             }
             $code--;
-            // Make sure jexcel starts on zero
+            // Make sure jspreadsheet starts on zero
             if ($code < 0) {
                 $code = 0;
             }
