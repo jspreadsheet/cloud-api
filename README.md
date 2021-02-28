@@ -1,4 +1,4 @@
 # client
 Cloud Client API
 
-https://jexcel.net
+https://jspreadsheet.com
