@@ -1,24 +1,23 @@
 {
-    "name": "jexcel/client",
+    "name": "jspreadsheet/client",
     "type": "library",
-    "description": "Jexcel Cloud Client API Library",
+    "description": "Jspreadsheet Cloud Client API Library",
     "keywords": [
         "jexcel",
         "jexcel cloud",
         "spreadsheets"
     ],
-    "homepage": "https://jexcel.net/",
+    "homepage": "https://jspreadsheet.com/",
     "license": "MIT",
     "authors": [
         {
-            "name": "Jexcel",
-            "email": "contact@jexcel.net",
-            "homepage": "https://jexcel.net"
+            "name": "Jspreadsheet",
+            "email": "contact@jspreadsheet.com",
         }
     ],
     "autoload": {
         "psr-4": {
-            "jexcel\\": "src/"
+            "jspreadsheet\\": "src/"
         }
     }
 }

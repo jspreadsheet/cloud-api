@@ -1,29 +1,29 @@
 <?php
 require 'vendor/autoload.php';
 
-use jexcel\Jexcel;
+use jspreadsheet\Jspreadsheet;
 
-$jexcel = new Jexcel();
+$client = new Jspreadsheet();
 
 // get widths
-//$spreadsheet = $jexcel->getSpreadsheet('f0a9d5c1-2106-4641-86b1-71c144f61255');
+//$spreadsheet = $client->getSpreadsheet('f0a9d5c1-2106-4641-86b1-71c144f61255');
 //print_r($spreadsheet->getColumns()->getWidth()); // [40, 40, 45]
 
 /*
 //create default
-$spreadsheet = $jexcel->create();
+$spreadsheet = $client->create();
 // get guid
 print_r($spreadsheet->getGuid()); // 09e152f4-1114-47db-a4b2-166b48ab33f6
 */
 
 // create with options
-//$spreadsheet = $jexcel->create([
+//$spreadsheet = $client->create([
 //    'minDimensions' => [30, 30]
 //]);
 //
 //print_r($spreadsheet->getConfig()); // show configs
 
-$spreadsheet = $jexcel->getSpreadsheet('c6050da0-3917-4e42-8d1d-224c951100df');
+$spreadsheet = $client->getSpreadsheet('c6050da0-3917-4e42-8d1d-224c951100df');
 
 // get widths
 //$spreadsheet->getColumns()->getWidth(); // Array ( [0] => 253 [1] => 50 [2] => 50 [3] => 50 [4] => 50 [5] => 50 [6] => 205 [7] => 50 [8] => 50 [9] => 50 [10] => 50 [11] => 50 [12] => 149 [13] => 50 )
