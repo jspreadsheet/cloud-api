@@ -13,7 +13,7 @@
     "authors": [
         {
             "name": "Jspreadsheet",
-            "email": "contact@jspreadsheet.com",
+            "email": "contact@jspreadsheet.com"
         }
     ],
     "autoload": {
