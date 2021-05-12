@@ -64,6 +64,15 @@ class Jspreadsheet
     }
 
     /**
+     * @param array $configs
+     * @return array
+     */
+    public function create($configs = null)
+    {
+        return $this->post('create', $configs);
+    }
+
+    /**
      * @param string $uri
      * @return array
      */
