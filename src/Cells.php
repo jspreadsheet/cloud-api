@@ -123,6 +123,14 @@ class Cells
     }
 
     /**
+     * @return array
+     */
+    public function getValue()
+    {
+        return $this->client->get('value/'. $this->indexes);
+    }
+
+    /**
      * @param mixed $value
      * @return array
      */
@@ -133,11 +141,18 @@ class Cells
 
         foreach ($indexes as $index) {
             $index = Ident::getIdFromColumnName($index);
-
-            $data[] = ['x' => $index[0], 'y' => $index[1], 'value' => $value];
+            $data[] = ['x' => (int)$index[0], 'y' => (int)$index[1], 'value' => $value];
         }
 
         return $this->client->post('value/', $data);
+    }
+
+    /**
+     * @param $value
+     * @return array
+     */
+    public function setValues($value) {
+        return $this->setValue($value);
     }
 
     /**

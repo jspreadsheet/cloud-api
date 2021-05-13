@@ -3,7 +3,7 @@ namespace jspreadsheet;
 
 class Spreadsheet
 {
-    use Merge, Style, Footers, Headers;
+    use Merge, Style, Footers, Headers, Data;
 
     const USER_LEVEL_VIEWER = 1;
     const USER_LEVEL_EDITOR = 2;
@@ -119,7 +119,7 @@ class Spreadsheet
      */
     public function createWorksheet($configs = null)
     {
-        return $this->client->post('worksheets/create/', $configs);
+        return $this->client->post('create', $configs);
     }
 
     /**

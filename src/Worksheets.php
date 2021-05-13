@@ -48,8 +48,8 @@ class Worksheets
      * @param int $index
      * @return array
      */
-    public function moveTo($index)
+    public function move($index)
     {
-        return $this->client->post('worksheets/move/' . $this->client->guid . ',' . $index);
+        return $this->client->post('worksheets/move/' . $this->index . ',' . $index);
     }
 }
