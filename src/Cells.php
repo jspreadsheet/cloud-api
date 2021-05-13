@@ -148,14 +148,6 @@ class Cells
     }
 
     /**
-     * @param $value
-     * @return array
-     */
-    public function setValues($value) {
-        return $this->setValue($value);
-    }
-
-    /**
      * @return array
      */
     public function getData()
