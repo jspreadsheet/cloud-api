@@ -8,7 +8,7 @@
         "jexcel",
         "spreadsheets"
     ],
-    "homepage": "https://jspreadsheet.com/",
+    "homepage" : "https://jspreadsheet.com/",
     "license": "MIT",
     "authors": [
         {
