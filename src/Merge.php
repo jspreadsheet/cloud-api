@@ -41,7 +41,7 @@ trait Merge
      */
     public function removeMerge($cell)
     {
-        return $this->client->get('merge/remove/' . $cell);
+        return $this->client->post('merge/remove/' . $cell);
     }
 
     /**
@@ -49,6 +49,6 @@ trait Merge
      */
     public function resetMerge()
     {
-        return $this->client->get('merge/reset');
+        return $this->client->post('merge/reset');
     }
 }

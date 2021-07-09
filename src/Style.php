@@ -31,10 +31,10 @@ trait Style
      */
     public function resetStyle($cells)
     {
-        if (is_array($cells)) {
-            $cells = implode(',', $cells);
+        if (!is_array($cells)) {
+            $cells = explode(',', $cells);
         }
 
-        return $this->client->get('style/reset/'. $cells);
+        return $this->client->post('style/reset/', $cells);
     }
 }

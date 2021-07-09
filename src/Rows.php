@@ -97,6 +97,6 @@ class Rows
      */
     public function getData()
     {
-        return $this->client->get('data/row/'. $this->indexes);
+        return $this->client->get('rows/'. $this->indexes);
     }
 }

@@ -127,6 +127,6 @@ class Columns
      */
     public function orderBy($direction)
     {
-        return $this->client->post('columns/order/'. $this->indexes .'/'. $direction);
+        return $this->client->post('orderby/'. $this->indexes .'/'. $direction);
     }
 }
