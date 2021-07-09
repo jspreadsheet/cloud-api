@@ -50,6 +50,6 @@ class Worksheets
      */
     public function move($index)
     {
-        return $this->client->post('worksheets/move/' . $this->index . ',' . $index);
+        return $this->client->post('worksheets/move/' . $this->index . '/' . $index);
     }
 }
