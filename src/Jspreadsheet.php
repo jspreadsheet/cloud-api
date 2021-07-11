@@ -96,6 +96,18 @@ class Jspreadsheet
     }
 
     /**
+     * @param string $uri
+     * @param array $options
+     * @return array
+     */
+    public function delete($url, $options = null)
+    {
+        $content = $this->request('DELETE', $url, $options);
+
+        return json_decode($content, true);
+    }
+
+    /**
      * Final HTTP request
      * @param string $url
      * @param array $data
@@ -121,6 +133,8 @@ class Jspreadsheet
 
         if ($method == 'POST') {
             curl_setopt($curl, CURLOPT_POST, true);
+        } else if ($method == 'DELETE') {
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
         }
 
         if ($data) {

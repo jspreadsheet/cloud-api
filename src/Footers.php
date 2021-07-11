@@ -29,6 +29,6 @@ trait Footers
      */
     public function resetFooters()
     {
-        return $this->client->post('footers/reset');
+        return $this->client->delete('footers');
     }
 }

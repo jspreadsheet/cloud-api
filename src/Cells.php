@@ -86,7 +86,7 @@ class Cells
 
     public function resetMeta()
     {
-        return $this->client->post('meta/reset');
+        return $this->client->delete('meta');
     }
 
     /**

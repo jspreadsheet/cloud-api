@@ -41,7 +41,7 @@ class Worksheets
      */
     public function delete()
     {
-        return $this->client->post('worksheets/delete/' . $this->index);
+        return $this->client->delete('worksheets/' . $this->index);
     }
 
     /**

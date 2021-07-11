@@ -13,7 +13,7 @@ trait Style
             $cells = implode(',', $cells);
         }
 
-        return $this->client->get('style/'. $cells);
+        return $this->client->get('style/' . $cells);
     }
 
     /**
@@ -32,9 +32,9 @@ trait Style
     public function resetStyle($cells)
     {
         if (!is_array($cells)) {
-            $cells = explode(',', $cells);
+            $cells = implode(',', $cells);
         }
 
-        return $this->client->post('style/reset/', $cells);
+        return $this->client->delete('style/' . $cells);
     }
 }
