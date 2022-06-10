@@ -62,7 +62,15 @@ export interface IJspreadsheet {
    * Reset all data and add new ones.
    * @param data - New data,
    */
-  setData(data: string[][]): Promise<void>;
+  setData(
+    data: (
+      | string[]
+      | {
+          row: number;
+          data: string[];
+        }
+    )[]
+  ): Promise<void>;
 
   /**
    * Get the title of one or more headers.
