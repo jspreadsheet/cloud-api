@@ -5,6 +5,61 @@ export enum orderByDirection {
   Desc,
 }
 
+type ActionWithText = "warning" | "reject";
+type ActionWithoutAllowBlank = "reject";
+type ActionWithFormat = "format";
+
+export type ValidationAction =
+  | ActionWithText
+  | ActionWithoutAllowBlank
+  | ActionWithFormat;
+
+export type ValidationTypeWithoutCriteria = "list" | "exist" | "not exist";
+
+export interface IMapForValidationTypes {
+  number: "between" | "not between" | "<" | "<=" | ">" | ">=" | "=" | "!=";
+  textLength: "between" | "not between" | "<" | "<=" | ">" | ">=" | "=" | "!=";
+  text:
+    | "contains"
+    | "not contains"
+    | "begins with"
+    | "ends with"
+    | "="
+    | "valid email"
+    | "valid url";
+  date:
+    | "valid date"
+    | "between"
+    | "not between"
+    | "<"
+    | "<="
+    | ">"
+    | ">="
+    | "="
+    | "!=";
+}
+
+export type ValidationTypeWithCriteria = keyof IMapForValidationTypes;
+
+export type Validation<
+  Type extends ValidationTypeWithCriteria | ValidationTypeWithoutCriteria,
+  Action extends ValidationAction
+> = {
+  index: number;
+  value: {
+    action: Action;
+    type: Type;
+    criteria: Type extends ValidationTypeWithCriteria
+      ? IMapForValidationTypes[Type]
+      : undefined;
+    range: string;
+    text?: Action extends ActionWithText ? string : undefined;
+    allowBlank: Action extends ActionWithoutAllowBlank ? undefined : boolean;
+    value: Array<any>;
+    format: Action extends ActionWithFormat ? object : undefined;
+  };
+};
+
 export interface IJspreadsheetConstructor {
   new ({
     userSignature,
@@ -448,5 +503,19 @@ export interface IJspreadsheet {
    */
   setDefinedName(
     definedNames: { name: string; value: string }[]
+  ): Promise<void>;
+
+  getValidations(): Promise<
+    Validation<
+      ValidationTypeWithCriteria | ValidationTypeWithoutCriteria,
+      ValidationAction
+    >[]
+  >;
+
+  setValidations<
+    Type extends ValidationTypeWithCriteria | ValidationTypeWithoutCriteria,
+    Action extends ValidationAction
+  >(
+    validations: Validation<Type, Action>[]
   ): Promise<void>;
 }

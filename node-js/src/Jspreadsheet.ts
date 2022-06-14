@@ -3,9 +3,14 @@ import FormData from "form-data";
 import { Column, Nested, Worksheet } from "jspreadsheet";
 
 import {
+  ValidationTypeWithCriteria,
   IJspreadsheet,
   IJspreadsheetConstructor,
+  IMapForValidationTypes,
   orderByDirection,
+  Validation,
+  ValidationAction,
+  ValidationTypeWithoutCriteria,
 } from "./IJspreadsheet";
 import { appendObject, axiosRequisitionHandler } from "./utils";
 
@@ -749,12 +754,45 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
   async setDefinedName(definedNames: { name: string; value: string }[]) {
     const formData = new FormData();
 
-    definedNames.forEach(({ name, value }) => {
-      formData.append(name, value);
+    definedNames.forEach(({ name, value }, index) => {
+      formData.append(`data[${index}][index]`, name);
+      formData.append(`data[${index}][value]`, value);
     });
 
     await axiosRequisitionHandler(() =>
       this.axiosInstance.post("/names", formData.getBuffer(), {
+        headers: formData.getHeaders(),
+      })
+    );
+  }
+
+  async getValidations(): Promise<
+    Validation<
+      keyof IMapForValidationTypes | ValidationTypeWithoutCriteria,
+      ValidationAction
+    >[]
+  > {
+    return axiosRequisitionHandler(() =>
+      this.axiosInstance.get("/validations")
+    );
+  }
+
+  async setValidations<
+    Type extends ValidationTypeWithCriteria | ValidationTypeWithoutCriteria,
+    Action extends ValidationAction
+  >(validations: Validation<Type, Action>[]): Promise<void> {
+    const formData = new FormData();
+
+    validations.forEach(
+      ({ index: validationIndex, value: validation }, index) => {
+        formData.append(`data[${index}][index]`, validationIndex);
+
+        appendObject(formData, validation, `data[${index}][value]`);
+      }
+    );
+
+    await axiosRequisitionHandler(() =>
+      this.axiosInstance.post("/validations", formData.getBuffer(), {
         headers: formData.getHeaders(),
       })
     );

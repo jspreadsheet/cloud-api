@@ -706,7 +706,7 @@ json-stable-stringify-without-jsonify@^1.0.1:
   resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
   integrity sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==
 
-jspreadsheet@^8.1.15:
+jspreadsheet@^8.7.12:
   version "8.7.12"
   resolved "https://registry.yarnpkg.com/jspreadsheet/-/jspreadsheet-8.7.12.tgz#3fff7c9e903e023189d794f7465ca156bf417c7c"
   integrity sha512-TZxHam3oSUy7wc1/LESvELsqRX0/HtR5mQjdNiJMaweh8T5LejYt4UjzhEtck92wn3qsDdUvsuyTWXzOVFHewg==
