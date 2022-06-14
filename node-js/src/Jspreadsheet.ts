@@ -512,31 +512,41 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
       params += "/" + row;
     }
 
-    return axiosRequisitionHandler(() => this.axiosInstance.get("/width"));
+    return axiosRequisitionHandler(() =>
+      this.axiosInstance.get(`/properties${params}`)
+    );
   }
 
   setProperties(
-    column: number,
-    row: number,
-    options?: { [property: string]: any }
+    properties: {
+      column: number;
+      row: number;
+      options?: { [property: string]: any };
+    }[]
   ): Promise<void>;
-  setProperties(column: number, options: Column): Promise<void>;
+  setProperties(
+    properties: { column: number; options: Column }[]
+  ): Promise<void>;
   async setProperties(
-    column: number,
-    row: number | { [property: string]: any },
-    options?: { [property: string]: any }
-  ) {
+    properties: {
+      column: number;
+      row?: number;
+      options?: Column | { [property: string]: any };
+    }[]
+  ): Promise<void> {
     const formData = new FormData();
 
-    formData.append("column", column);
+    properties.forEach(({ column, row, options }, index) => {
+      formData.append(`data[${index}][x]`, column);
 
-    if (typeof row === "number") {
-      formData.append("row", row);
-    } else {
-      options = row;
-    }
+      if (typeof row === "number") {
+        formData.append(`data[${index}][y]`, row);
+      }
 
-    appendObject(formData, options, "options");
+      if (options) {
+        appendObject(formData, options, `data[${index}][value]`);
+      }
+    });
 
     await axiosRequisitionHandler(() =>
       this.axiosInstance.post("/properties", formData.getBuffer(), {
@@ -546,7 +556,12 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
   }
 
   resetProperties(column: number, row: number): Promise<void> {
-    return this.setProperties(column, row);
+    return this.setProperties([
+      {
+        column,
+        row,
+      },
+    ]);
   }
 
   async orderBy(column: number, direction?: orderByDirection) {

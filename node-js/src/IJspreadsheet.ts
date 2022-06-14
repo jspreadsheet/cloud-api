@@ -350,9 +350,11 @@ export interface IJspreadsheet {
    * @param options - new options. If omitted, current options will be removed.
    */
   setProperties(
-    column: number,
-    row: number,
-    options?: { [property: string]: any }
+    properties: {
+      column: number;
+      row: number;
+      options?: { [property: string]: any };
+    }[]
   ): Promise<void>;
 
   /**
@@ -360,7 +362,9 @@ export interface IJspreadsheet {
    * @param column - Column number to be updated.
    * @param options - Properties to be set.
    */
-  setProperties(column: number, options: Column): Promise<void>;
+  setProperties(
+    properties: { column: number; options: Column }[]
+  ): Promise<void>;
 
   /**
    * Delete cell properties.
