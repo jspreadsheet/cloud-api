@@ -706,6 +706,14 @@ json-stable-stringify-without-jsonify@^1.0.1:
   resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
   integrity sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==
 
+jspreadsheet-alpha@^9.0.17:
+  version "9.0.17"
+  resolved "https://registry.yarnpkg.com/jspreadsheet-alpha/-/jspreadsheet-alpha-9.0.17.tgz#c910694f084bc1e79d64897092d72450c36cb893"
+  integrity sha512-IQtim7CiRG/+RJ8w9fENo3KXTLmEU6bgP+dSgzV9b8AA0o3CYGAyabkjaDPMYGV2pD+6aw7srm68Al67xOKFXg==
+  dependencies:
+    "@jspreadsheet/formula" "^1.3.0"
+    jsuites "^4.13.5"
+
 jspreadsheet@^8.7.12:
   version "8.7.12"
   resolved "https://registry.yarnpkg.com/jspreadsheet/-/jspreadsheet-8.7.12.tgz#3fff7c9e903e023189d794f7465ca156bf417c7c"
@@ -718,6 +726,11 @@ jsuites@^4.12.6:
   version "4.13.5"
   resolved "https://registry.yarnpkg.com/jsuites/-/jsuites-4.13.5.tgz#6eaa02ee86daef2b6b53ece11507d5d791de776c"
   integrity sha512-QGHwH+mmRaeNfCuQbK3id8+u38pu9aG/V3VgYuRHuCKl9rPLwwv7VnM486y6A6wC+ADyQcE9IZyeedzSvkdbQA==
+
+jsuites@^4.13.5:
+  version "4.13.6"
+  resolved "https://registry.yarnpkg.com/jsuites/-/jsuites-4.13.6.tgz#712117618fa4c9f7bde61d478a413d5f02999a51"
+  integrity sha512-OmZ1SyKL4D0rAIxY/qXLNz3k7tYjgK5UgYSmeywgt4fdP4JtQetp3kdg/z9sythgKF5rE40avoU2EnOPpXAsCg==
 
 levn@^0.4.1:
   version "0.4.1"

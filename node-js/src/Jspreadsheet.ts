@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestHeaders } from "axios";
 import FormData from "form-data";
-import { Column, Nested, Worksheet } from "jspreadsheet";
+import { Column, Nested, Worksheet } from "jspreadsheet-alpha";
 
 import {
   ValidationTypeWithCriteria,
@@ -808,6 +808,42 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
 
     await axiosRequisitionHandler(() =>
       this.axiosInstance.post("/validations", formData.getBuffer(), {
+        headers: formData.getHeaders(),
+      })
+    );
+  }
+
+  async getFreezeRows() {
+    return axiosRequisitionHandler(() =>
+      this.axiosInstance.get("/freeze/rows")
+    );
+  }
+
+  async setFreezeRows(row: number) {
+    const formData = new FormData();
+
+    formData.append("row", row);
+
+    await axiosRequisitionHandler(() =>
+      this.axiosInstance.post("/freeze/rows", formData.getBuffer(), {
+        headers: formData.getHeaders(),
+      })
+    );
+  }
+
+  async getFreezeColumns() {
+    return axiosRequisitionHandler(() =>
+      this.axiosInstance.get("/freeze/columns")
+    );
+  }
+
+  async setFreezeColumns(column: number) {
+    const formData = new FormData();
+
+    formData.append("column", column);
+
+    await axiosRequisitionHandler(() =>
+      this.axiosInstance.post("/freeze/columns", formData.getBuffer(), {
         headers: formData.getHeaders(),
       })
     );

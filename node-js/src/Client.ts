@@ -1,6 +1,6 @@
 import axios, { AxiosRequestHeaders } from "axios";
 import FormData from "form-data";
-import { Spreadsheet } from "jspreadsheet";
+import { Spreadsheet } from "jspreadsheet-alpha";
 
 import { IClient, IClientConstructor } from "./IClient";
 import { IJspreadsheet } from "./IJspreadsheet";

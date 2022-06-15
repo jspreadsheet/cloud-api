@@ -1,4 +1,4 @@
-import { Column, Nested, Spreadsheet, Worksheet } from "jspreadsheet";
+import { Column, Nested, Spreadsheet, Worksheet } from "jspreadsheet-alpha";
 
 export enum orderByDirection {
   Asc,
@@ -522,4 +522,12 @@ export interface IJspreadsheet {
   >(
     validations: Validation<Type, Action>[]
   ): Promise<void>;
+
+  getFreezeRows(): Promise<number>;
+
+  setFreezeRows(row: number): Promise<void>;
+
+  getFreezeColumns(): Promise<number>;
+
+  setFreezeColumns(column: number): Promise<void>;
 }
