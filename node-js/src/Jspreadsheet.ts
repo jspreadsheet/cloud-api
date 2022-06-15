@@ -68,11 +68,13 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
   }
 
   async setConfig(
-    config: Worksheet & {
-      definedNames?: any;
-      toolbar?: any;
-      tabs?: any;
-    }
+    config:
+      | Partial<Worksheet>
+      | {
+          definedNames?: any;
+          toolbar?: any;
+          tabs?: any;
+        }
   ) {
     const formData = new FormData();
 
@@ -392,7 +394,7 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     columnNumber,
   }: {
     data?: string[][];
-    properties?: Column;
+    properties?: Column[];
     insertBefore?: boolean;
     numOfColumns: number;
     columnNumber?: number;
@@ -447,7 +449,7 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     }
 
     await axiosRequisitionHandler(() =>
-      this.axiosInstance.post("/columns/move", formData.getBuffer(), {
+      this.axiosInstance.post("/columns/delete", formData.getBuffer(), {
         headers: formData.getHeaders(),
       })
     );
@@ -705,7 +707,7 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     );
   }
 
-  async createWorksheet(options?: Worksheet) {
+  async createWorksheet(options?: Partial<Worksheet>) {
     const formData = new FormData();
 
     if (options) {
