@@ -95,11 +95,13 @@ export interface IJspreadsheet {
    * @param config - New worksheet config.
    */
   setConfig(
-    config: Worksheet & {
-      definedNames?: any;
-      toolbar?: any;
-      tabs?: any;
-    }
+    config:
+      | Partial<Worksheet>
+      | {
+          definedNames?: any;
+          toolbar?: any;
+          tabs?: any;
+        }
   ): Promise<void>;
 
   /**
@@ -301,7 +303,7 @@ export interface IJspreadsheet {
    */
   insertColumn(options: {
     data?: string[][];
-    properties?: Column;
+    properties?: Column[];
     insertBefore?: boolean;
     numOfColumns: number;
     columnNumber?: number;
@@ -473,7 +475,7 @@ export interface IJspreadsheet {
    * @param options - Options for this new worksheet.
    */
   createWorksheet(
-    options?: Worksheet
+    options?: Partial<Worksheet>
   ): Promise<{ worksheet: number; worksheetId: string }>;
 
   /**
