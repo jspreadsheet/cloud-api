@@ -5,6 +5,11 @@ export enum orderByDirection {
   Desc,
 }
 
+export enum privacy {
+  Public,
+  Private,
+}
+
 type ActionWithText = "warning" | "reject";
 type ActionWithoutAllowBlank = "reject";
 type ActionWithFormat = "format";
@@ -550,4 +555,6 @@ export interface IJspreadsheet {
   deleteVersion(versionId: string): Promise<void>;
 
   setName(name?: string): Promise<void>;
+
+  setPrivacy(privacy: privacy): Promise<void>;
 }
