@@ -22,4 +22,14 @@ export interface IClient {
    * @param worksheetIndex - worksheet index.
    */
   getSpreadsheet(guid: string, worksheetIndex?: number): IJspreadsheet;
+
+  listSpreadsheets(): Promise<
+    {
+      sheet_guid: string;
+      sheet_description: string;
+      sheet_updated: string;
+      sheet_status: number;
+      sheet_privacy: number;
+    }[]
+  >;
 }

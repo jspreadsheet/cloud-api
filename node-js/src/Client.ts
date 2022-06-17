@@ -66,6 +66,20 @@ const Client: IClientConstructor = class Client implements IClient {
       baseUrl: this.baseUrl,
     });
   }
+
+  listSpreadsheets() {
+    const headers: AxiosRequestHeaders = {};
+
+    if (this.token) {
+      headers.Authorization = `Bearer ${this.token}`;
+    }
+
+    return axiosRequisitionHandler(() =>
+      axios.get(`${this.baseUrl}/list`, {
+        headers,
+      })
+    );
+  }
 };
 
 export default Client;
