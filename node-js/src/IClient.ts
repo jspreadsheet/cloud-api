@@ -23,6 +23,9 @@ export interface IClient {
    */
   getSpreadsheet(guid: string, worksheetIndex?: number): IJspreadsheet;
 
+  /**
+   * List this user's spreadsheets.
+   */
   listSpreadsheets(): Promise<
     {
       sheet_guid: string;

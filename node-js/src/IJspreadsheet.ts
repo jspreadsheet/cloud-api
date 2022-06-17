@@ -516,6 +516,9 @@ export interface IJspreadsheet {
     definedNames: { name: string; value: string }[]
   ): Promise<void>;
 
+  /**
+   * Get all validations.
+   */
   getValidations(): Promise<
     Validation<
       ValidationTypeWithCriteria | ValidationTypeWithoutCriteria,
@@ -523,6 +526,9 @@ export interface IJspreadsheet {
     >[]
   >;
 
+  /**
+   * Create or update validations.
+   */
   setValidations<
     Type extends ValidationTypeWithCriteria | ValidationTypeWithoutCriteria,
     Action extends ValidationAction
@@ -530,14 +536,31 @@ export interface IJspreadsheet {
     validations: Validation<Type, Action>[]
   ): Promise<void>;
 
+  /**
+   * Get freezeRows property value.
+   */
   getFreezeRows(): Promise<number>;
 
+  /**
+   * Set the freezeRows property value.
+   * @param row - New value.
+   */
   setFreezeRows(row: number): Promise<void>;
 
+  /**
+   * Get freezeColumns property value.
+   */
   getFreezeColumns(): Promise<number>;
 
+  /**
+   * * Set the freezeColumns property value.
+   * @param column - New value.
+   */
   setFreezeColumns(column: number): Promise<void>;
 
+  /**
+   * Get all versions in history.
+   */
   getHistory(): Promise<
     {
       versionId: string;
@@ -546,22 +569,54 @@ export interface IJspreadsheet {
     }[]
   >;
 
+  /**
+   * Create version with current spreadsheet state.
+   */
   setHistory(): Promise<void>;
 
+  /**
+   * Get version saved in history.
+   * @param versionId - Version identifier.
+   */
   getVersion(versionId: string): Promise<Spreadsheet>;
 
+  /**
+   * Return the spreadsheet to some saved version.
+   * @param versionId - Version identifier.
+   */
   recoverVersion(versionId: string): Promise<void>;
 
+  /**
+   * Remove version from history.
+   * @param versionId  Version identifier.
+   */
   deleteVersion(versionId: string): Promise<void>;
 
+  /**
+   * Rename spreadsheet.
+   * @param name - New name. If no name is given, the spreadsheet will adopt the default name.
+   */
   setName(name?: string): Promise<void>;
 
+  /**
+   * Get privacy.
+   */
   getPrivacy(): Promise<privacyEnum>;
 
+  /**
+   * Change privacy.
+   * @param privacy - New privacy.
+   */
   setPrivacy(privacy: privacyEnum): Promise<void>;
 
+  /**
+   * Delete this spreadsheet.
+   */
   delete(): Promise<void>;
 
+  /**
+   * List guest users.
+   */
   getUsers(): Promise<{
     name: string;
     email: string;
@@ -570,11 +625,23 @@ export interface IJspreadsheet {
     token: string;
   }>;
 
+  /**
+   * Add new guests.
+   * @param users - New guests.
+   */
   setUsers(
     users: { email: string; level: number }[]
   ): Promise<{ email: string; token: string }[]>;
 
+  /**
+   * Update the level of guests that have already been added.
+   * @param users - Emails belonging to guests that must be updated and their respective new levels.
+   */
   updateUsers(users: { email: string; level: number }[]): Promise<void>;
 
+  /**
+   * Remove one or more guests.
+   * @param users - Emails from the guests that should be removed.
+   */
   deleteUsers(users: string | string[]): Promise<void>;
 }
