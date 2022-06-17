@@ -5,7 +5,7 @@ export enum orderByDirection {
   Desc,
 }
 
-export enum privacy {
+export enum privacyEnum {
   Public,
   Private,
 }
@@ -556,5 +556,9 @@ export interface IJspreadsheet {
 
   setName(name?: string): Promise<void>;
 
-  setPrivacy(privacy: privacy): Promise<void>;
+  getPrivacy(): Promise<privacyEnum>;
+
+  setPrivacy(privacy: privacyEnum): Promise<void>;
+
+  delete(): Promise<void>;
 }

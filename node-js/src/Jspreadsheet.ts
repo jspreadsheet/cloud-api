@@ -11,7 +11,7 @@ import {
   Validation,
   ValidationAction,
   ValidationTypeWithoutCriteria,
-  privacy,
+  privacyEnum,
 } from "./IJspreadsheet";
 import { appendObject, axiosRequisitionHandler } from "./utils";
 
@@ -906,7 +906,11 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     );
   }
 
-  async setPrivacy(privacy: privacy) {
+  getPrivacy() {
+    return axiosRequisitionHandler(() => this.axiosInstance.get("/privacy"));
+  }
+
+  async setPrivacy(privacy: privacyEnum) {
     const formData = new FormData();
 
     await axiosRequisitionHandler(() =>
@@ -914,6 +918,10 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
         headers: formData.getHeaders(),
       })
     );
+  }
+
+  async delete() {
+    await axiosRequisitionHandler(() => this.axiosInstance.delete(""));
   }
 };
 
