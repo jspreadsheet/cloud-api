@@ -890,6 +890,24 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
       this.axiosInstance.delete(`/history/${versionId}`)
     );
   }
+
+  setName(name?: string) {
+    const formData = new FormData();
+
+    if (name) {
+      formData.append("data", name);
+    }
+
+    return axiosRequisitionHandler(() =>
+      this.axiosInstance.post(
+        `/name`,
+        formData.getBuffer(),
+        {
+          headers: formData.getHeaders(),
+        }
+      )
+    );
+  }
 };
 
 export default Jspreadsheet;

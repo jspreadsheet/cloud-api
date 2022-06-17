@@ -548,4 +548,6 @@ export interface IJspreadsheet {
   recoverVersion(versionId: string): Promise<void>;
 
   deleteVersion(versionId: string): Promise<void>;
+
+  setName(name?: string): Promise<void>;
 }
