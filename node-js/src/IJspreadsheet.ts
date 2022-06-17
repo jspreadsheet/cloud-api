@@ -561,4 +561,20 @@ export interface IJspreadsheet {
   setPrivacy(privacy: privacyEnum): Promise<void>;
 
   delete(): Promise<void>;
+
+  getUsers(): Promise<{
+    name: string;
+    email: string;
+    title: string;
+    level: number;
+    token: string;
+  }>;
+
+  setUsers(
+    users: { email: string; level: number }[]
+  ): Promise<{ email: string; token: string }[]>;
+
+  updateUsers(users: { email: string; level: number }[]): Promise<void>;
+
+  deleteUsers(users: string | string[]): Promise<void>;
 }

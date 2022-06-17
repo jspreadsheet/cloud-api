@@ -923,6 +923,54 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
   async delete() {
     await axiosRequisitionHandler(() => this.axiosInstance.delete(""));
   }
+
+  getUsers() {
+    return axiosRequisitionHandler(() => this.axiosInstance.get("/users"));
+  }
+
+  async setUsers(users: { email: string; level: number }[]) {
+    const formData = new FormData();
+
+    appendObject(formData, users, "data");
+
+    const result = await axiosRequisitionHandler(() =>
+      this.axiosInstance.post("/users", formData.getBuffer(), {
+        headers: formData.getHeaders(),
+      })
+    );
+
+    return result.data.users;
+  }
+
+  async updateUsers(users: { email: string; level: number }[]) {
+    const formData = new FormData();
+
+    const reqBody = users.map((user) => [user.email, user.level]);
+
+    appendObject(formData, reqBody, "data");
+
+    await axiosRequisitionHandler(() =>
+      this.axiosInstance.post("/users/update", formData.getBuffer(), {
+        headers: formData.getHeaders(),
+      })
+    );
+  }
+
+  async deleteUsers(users: string | string[]) {
+    if (typeof users === "string") {
+      users = [users];
+    }
+
+    const formData = new FormData();
+
+    appendObject(formData, users, "data");
+
+    await axiosRequisitionHandler(() =>
+      this.axiosInstance.post("/users/delete", formData.getBuffer(), {
+        headers: formData.getHeaders(),
+      })
+    );
+  }
 };
 
 export default Jspreadsheet;
