@@ -850,6 +850,46 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
       })
     );
   }
+
+  getHistory() {
+    return axiosRequisitionHandler(() => this.axiosInstance.get("/history"));
+  }
+
+  async setHistory() {
+    const formData = new FormData();
+
+    await axiosRequisitionHandler(() =>
+      this.axiosInstance.post("/history", formData.getBuffer(), {
+        headers: formData.getHeaders(),
+      })
+    );
+  }
+
+  getVersion(versionId: string) {
+    return axiosRequisitionHandler(() =>
+      this.axiosInstance.get(`/history/${versionId}`)
+    );
+  }
+
+  recoverVersion(versionId: string) {
+    const formData = new FormData();
+
+    return axiosRequisitionHandler(() =>
+      this.axiosInstance.post(
+        `/history/recover/${versionId}`,
+        formData.getBuffer(),
+        {
+          headers: formData.getHeaders(),
+        }
+      )
+    );
+  }
+
+  async deleteVersion(versionId: string) {
+    await axiosRequisitionHandler(() =>
+      this.axiosInstance.delete(`/history/${versionId}`)
+    );
+  }
 };
 
 export default Jspreadsheet;

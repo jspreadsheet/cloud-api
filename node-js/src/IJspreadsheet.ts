@@ -532,4 +532,20 @@ export interface IJspreadsheet {
   getFreezeColumns(): Promise<number>;
 
   setFreezeColumns(column: number): Promise<void>;
+
+  getHistory(): Promise<
+    {
+      versionId: string;
+      date: string;
+      size: number;
+    }[]
+  >;
+
+  setHistory(): Promise<void>;
+
+  getVersion(versionId: string): Promise<Spreadsheet>;
+
+  recoverVersion(versionId: string): Promise<void>;
+
+  deleteVersion(versionId: string): Promise<void>;
 }
