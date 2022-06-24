@@ -1,4 +1,4 @@
-import { Spreadsheet } from "jspreadsheet-alpha";
+import { Spreadsheet, Worksheet } from "jspreadsheet-alpha";
 
 import { IJspreadsheet } from "./IJspreadsheet";
 
@@ -13,7 +13,7 @@ export interface IClient {
    */
   create(options?: {
     description?: string;
-    config?: Spreadsheet;
+    config?: Partial<Spreadsheet> | Partial<Worksheet>;
   }): Promise<IJspreadsheet>;
 
   /**

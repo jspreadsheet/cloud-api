@@ -1,6 +1,6 @@
 import axios, { AxiosRequestHeaders } from "axios";
 import FormData from "form-data";
-import { Spreadsheet } from "jspreadsheet-alpha";
+import { Spreadsheet, Worksheet } from "jspreadsheet-alpha";
 
 import { IClient, IClientConstructor } from "./IClient";
 import { IJspreadsheet } from "./IJspreadsheet";
@@ -33,7 +33,10 @@ const Client: IClientConstructor = class Client implements IClient {
     });
   }
 
-  async create(options?: { description?: string; config?: Spreadsheet }) {
+  async create(options?: {
+    description?: string;
+    config?: Partial<Spreadsheet> | Partial<Worksheet>;
+  }) {
     const formData = new FormData();
 
     if (options) {

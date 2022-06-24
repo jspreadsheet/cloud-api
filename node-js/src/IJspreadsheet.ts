@@ -138,7 +138,7 @@ export interface IJspreadsheet {
    * Get the title of one or more headers.
    * @param column - Position of one or more columns. If omitted, all header titles are returned.
    */
-  getHeader(column?: number | number[]): Promise<{ [column: number]: string }>;
+  getHeaders(column?: number | number[]): Promise<{ [column: number]: string }>;
 
   /**
    * Set a header title.
@@ -170,12 +170,12 @@ export interface IJspreadsheet {
    * Reset previous footer values and set new values.
    * @param footer - New footer values.
    */
-  setFooter(footer: (string | undefined | null)[][]): Promise<void>;
+  setFooters(footer: (string | undefined | null)[][]): Promise<void>;
 
   /**
    * Get all footer values.
    */
-  getFooter(): Promise<(string | null)[][] | []>;
+  getFooters(): Promise<(string | null)[][] | []>;
 
   /**
    * Set the value of a pre-existing footer coordinate.
@@ -208,13 +208,13 @@ export interface IJspreadsheet {
    * Set comments to one or more cells.
    * @param comments - Array with cell names and their new comments. If a cell's new comment is an empty string, the comment will be removed.
    */
-  setComment(comments: { cellName: string; value: string }[]): Promise<void>;
+  setComments(comments: { cellName: string; value: string }[]): Promise<void>;
 
   /**
    * Get comments from one or more cells.
    * @param cellNames - Comma-separated cell names and/or ranges. If omitted, all comments are returned.
    */
-  getComment(cellNames?: string): Promise<{ [cellName: string]: string }>;
+  getComments(cellNames?: string): Promise<{ [cellName: string]: string }>;
 
   // /**
   //  * Remove all comments.
@@ -351,12 +351,12 @@ export interface IJspreadsheet {
   ): Promise<{ [columnNumber: number]: number }>;
 
   /**
-   * Set cell properties.
-   * @param column - cell column.
-   * @param row - cell row.
-   * @param options - new options. If omitted, current options will be removed.
+   * Set cell properties, removing all old properties.
+   * @param properties[].column - cell column.
+   * @param properties[].row - cell row.
+   * @param properties[].options - new options. If omitted, current options will be removed.
    */
-  setProperties(
+  setProperty(
     properties: {
       column: number;
       row: number;
@@ -365,11 +365,32 @@ export interface IJspreadsheet {
   ): Promise<void>;
 
   /**
-   * Set column properties.
-   * @param column - Column number to be updated.
-   * @param options - Properties to be set.
+   * Set column properties, removing all old properties.
+   * @param properties[].column - Column number to be updated.
+   * @param properties[].options - Properties to be set.
    */
-  setProperties(
+  setProperty(properties: { column: number; options?: Column }[]): Promise<void>;
+
+  /**
+   * Set cell properties, but without removing old ones.
+   * @param properties[].column - cell column.
+   * @param properties[].row - cell row.
+   * @param properties[].options - new options. If omitted, current options will be removed.
+   */
+  updateProperty(
+    properties: {
+      column: number;
+      row: number;
+      options: { [property: string]: any };
+    }[]
+  ): Promise<void>;
+
+  /**
+   * Set column properties, but without removing old ones.
+   * @param properties[].column - Column number to be updated.
+   * @param properties[].options - Properties to be set.
+   */
+  updateProperty(
     properties: { column: number; options: Column }[]
   ): Promise<void>;
 
@@ -385,7 +406,7 @@ export interface IJspreadsheet {
    * @param column - cell x coordinate.
    * @param row - cell y coordinate.
    */
-  getProperties(
+  getProperty(
     column: number,
     row: number
   ): Promise<{ [property: string]: any }>;
@@ -394,7 +415,7 @@ export interface IJspreadsheet {
    * Get the properties of one or more columns.
    * @param columns - One or more column numbers. If omitted, all column properties are returned.
    */
-  getProperties(
+  getProperty(
     columns?: number | number[]
   ): Promise<{ [columnIndex: string]: Column }>;
 
@@ -506,13 +527,13 @@ export interface IJspreadsheet {
   /**
    * Get all defined names.
    */
-  getDefinedName(): Promise<{ [definedName: string]: string }>;
+  getDefinedNames(): Promise<{ [definedName: string]: string }>;
 
   /**
    * Define new defined names.
    * @param definedNames - New defined names.
    */
-  setDefinedName(
+  setDefinedNames(
     definedNames: { name: string; value: string }[]
   ): Promise<void>;
 
@@ -588,7 +609,7 @@ export interface IJspreadsheet {
 
   /**
    * Remove version from history.
-   * @param versionId  Version identifier.
+   * @param versionId - Version identifier.
    */
   deleteVersion(versionId: string): Promise<void>;
 

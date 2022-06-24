@@ -157,7 +157,7 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     await axiosRequisitionHandler(() => this.axiosInstance.delete("/nested"));
   }
 
-  getHeader(column?: number | number[]) {
+  getHeaders(column?: number | number[]) {
     let params = "";
 
     if (typeof column === "number") {
@@ -173,11 +173,11 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     );
   }
 
-  getFooter() {
+  getFooters() {
     return axiosRequisitionHandler(() => this.axiosInstance.get("/footers"));
   }
 
-  async setFooter(footer: string[][]) {
+  async setFooters(footer: string[][]) {
     const formData = new FormData();
 
     appendObject(formData, footer, "data");
@@ -225,7 +225,7 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     );
   }
 
-  getComment(cellNames?: string) {
+  getComments(cellNames?: string) {
     let params = "";
 
     if (cellNames) {
@@ -237,7 +237,7 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     );
   }
 
-  async setComment(comments: { cellName: string; value: string }[]) {
+  async setComments(comments: { cellName: string; value: string }[]) {
     const formData = new FormData();
 
     comments.forEach(({ cellName, value }) => {
@@ -495,14 +495,14 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     );
   }
 
-  getProperties(
+  getProperty(
     column: number,
     row: number
   ): Promise<{ [property: string]: any }>;
-  getProperties(
+  getProperty(
     columns?: number | number[]
   ): Promise<{ [columnIndex: string]: Column }>;
-  getProperties(column?: number | number[], row?: number) {
+  getProperty(column?: number | number[], row?: number) {
     let params = "";
 
     if (Array.isArray(column)) {
@@ -520,17 +520,17 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     );
   }
 
-  setProperties(
+  setProperty(
     properties: {
       column: number;
       row: number;
       options?: { [property: string]: any };
     }[]
   ): Promise<void>;
-  setProperties(
-    properties: { column: number; options: Column }[]
+  setProperty(
+    properties: { column: number; options?: Column }[]
   ): Promise<void>;
-  async setProperties(
+  async setProperty(
     properties: {
       column: number;
       row?: number;
@@ -558,8 +558,44 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     );
   }
 
+  updateProperty(
+    properties: {
+      column: number;
+      row: number;
+      options: { [property: string]: any };
+    }[]
+  ): Promise<void>;
+  updateProperty(
+    properties: { column: number; options: Column }[]
+  ): Promise<void>;
+  async updateProperty(
+    properties: {
+      column: number;
+      row?: number;
+      options: Column | { [property: string]: any };
+    }[]
+  ) {
+    const formData = new FormData();
+
+    properties.forEach(({ column, row, options }, index) => {
+      formData.append(`data[${index}][x]`, column);
+
+      if (typeof row === "number") {
+        formData.append(`data[${index}][y]`, row);
+      }
+
+      appendObject(formData, options, `data[${index}][value]`);
+    });
+
+    await axiosRequisitionHandler(() =>
+      this.axiosInstance.post("/properties/update", formData.getBuffer(), {
+        headers: formData.getHeaders(),
+      })
+    );
+  }
+
   resetProperties(column: number, row: number): Promise<void> {
-    return this.setProperties([
+    return this.setProperty([
       {
         column,
         row,
@@ -765,11 +801,11 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     );
   }
 
-  getDefinedName() {
+  getDefinedNames() {
     return axiosRequisitionHandler(() => this.axiosInstance.get("/names"));
   }
 
-  async setDefinedName(definedNames: { name: string; value: string }[]) {
+  async setDefinedNames(definedNames: { name: string; value: string }[]) {
     const formData = new FormData();
 
     definedNames.forEach(({ name, value }, index) => {
