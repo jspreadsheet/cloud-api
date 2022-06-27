@@ -834,7 +834,12 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
   async setValidations<
     Type extends ValidationTypeWithCriteria | ValidationTypeWithoutCriteria,
     Action extends ValidationAction
-  >(validations: Validation<Type, Action>[]): Promise<void> {
+  >(
+    validations: {
+      index: number;
+      value: Validation<Type, Action>;
+    }[]
+  ): Promise<void> {
     const formData = new FormData();
 
     validations.forEach(

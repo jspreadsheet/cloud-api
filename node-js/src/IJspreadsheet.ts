@@ -50,19 +50,16 @@ export type Validation<
   Type extends ValidationTypeWithCriteria | ValidationTypeWithoutCriteria,
   Action extends ValidationAction
 > = {
-  index: number;
-  value: {
-    action: Action;
-    type: Type;
-    criteria: Type extends ValidationTypeWithCriteria
-      ? IMapForValidationTypes[Type]
-      : undefined;
-    range: string;
-    text?: Action extends ActionWithText ? string : undefined;
-    allowBlank: Action extends ActionWithoutAllowBlank ? undefined : boolean;
-    value: Array<any>;
-    format: Action extends ActionWithFormat ? object : undefined;
-  };
+  action: Action;
+  type: Type;
+  criteria: Type extends ValidationTypeWithCriteria
+    ? IMapForValidationTypes[Type]
+    : undefined;
+  range: string;
+  text?: Action extends ActionWithText ? string : undefined;
+  allowBlank: Action extends ActionWithoutAllowBlank ? undefined : boolean;
+  value: Array<any>;
+  format: Action extends ActionWithFormat ? object : undefined;
 };
 
 export interface IJspreadsheetConstructor {
@@ -369,7 +366,9 @@ export interface IJspreadsheet {
    * @param properties[].column - Column number to be updated.
    * @param properties[].options - Properties to be set.
    */
-  setProperty(properties: { column: number; options?: Column }[]): Promise<void>;
+  setProperty(
+    properties: { column: number; options?: Column }[]
+  ): Promise<void>;
 
   /**
    * Set cell properties, but without removing old ones.
@@ -554,7 +553,10 @@ export interface IJspreadsheet {
     Type extends ValidationTypeWithCriteria | ValidationTypeWithoutCriteria,
     Action extends ValidationAction
   >(
-    validations: Validation<Type, Action>[]
+    validations: {
+      index: number;
+      value: Validation<Type, Action>;
+    }[]
   ): Promise<void>;
 
   /**

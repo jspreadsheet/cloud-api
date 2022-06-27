@@ -19,7 +19,7 @@ export interface IClient {
   /**
    * Get an object that represents a spreadsheet.
    * @param guid - spreadsheet guid.
-   * @param worksheetIndex - worksheet index.
+   * @param worksheetIndex - worksheet index. Default is 0.
    */
   getSpreadsheet(guid: string, worksheetIndex?: number): IJspreadsheet;
 
