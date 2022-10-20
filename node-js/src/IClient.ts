@@ -1,4 +1,4 @@
-import { Spreadsheet, Worksheet } from "jspreadsheet-alpha";
+import { Spreadsheet, Worksheet } from "./jspreadsheetTypes";
 
 import { IJspreadsheet } from "./IJspreadsheet";
 

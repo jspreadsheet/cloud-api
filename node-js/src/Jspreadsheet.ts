@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestHeaders } from "axios";
 import FormData from "form-data";
-import { Column, Nested, Worksheet } from "jspreadsheet-alpha";
+
+import { Column, Nested, Worksheet } from "./jspreadsheetTypes";
 
 import {
   ValidationTypeWithCriteria,
@@ -103,7 +104,15 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     return axiosRequisitionHandler(() => this.axiosInstance.get("/data"));
   }
 
-  async setData(data: string[][]) {
+  async setData(
+    data: (
+      | string[]
+      | {
+          row: number;
+          data: string[];
+        }
+    )[]
+  ) {
     const formData = new FormData();
     appendObject(formData, data, "data");
 

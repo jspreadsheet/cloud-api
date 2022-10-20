@@ -1,4 +1,4 @@
-import { Column, Nested, Spreadsheet, Worksheet } from "jspreadsheet-alpha";
+import { Column, Nested, Spreadsheet, Worksheet } from "./jspreadsheetTypes";
 
 export enum orderByDirection {
   Asc,

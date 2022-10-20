@@ -56,11 +56,6 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@jspreadsheet/formula@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@jspreadsheet/formula/-/formula-1.3.0.tgz#7d2948a8524dd8ab5ecb34afd3cc08cda8935257"
-  integrity sha512-UaHPtH/XGejN3MWh0ynCWQ+iv0xu6ZunkFBwIwEXLcXmBOTno9NaBTywQ25IUPiSzJXyJvVk/f6BTW0RDc0Tgw==
-
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -705,32 +700,6 @@ json-stable-stringify-without-jsonify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
   integrity sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==
-
-jspreadsheet-alpha@^9.0.21:
-  version "9.0.21"
-  resolved "https://registry.yarnpkg.com/jspreadsheet-alpha/-/jspreadsheet-alpha-9.0.21.tgz#b552d2754339cb84f5667919af0e90b09bbb4a2f"
-  integrity sha512-JhOhltWqJfyJPovOEcJ0eTVdqlOalN7dlcZxacWKWnZTI1Y2IWJeS956mF2uWWNHZd6Rerxgy0SNX+injmJkFg==
-  dependencies:
-    "@jspreadsheet/formula" "^1.3.0"
-    jsuites "^4.14.0"
-
-jspreadsheet@^8.7.12:
-  version "8.7.12"
-  resolved "https://registry.yarnpkg.com/jspreadsheet/-/jspreadsheet-8.7.12.tgz#3fff7c9e903e023189d794f7465ca156bf417c7c"
-  integrity sha512-TZxHam3oSUy7wc1/LESvELsqRX0/HtR5mQjdNiJMaweh8T5LejYt4UjzhEtck92wn3qsDdUvsuyTWXzOVFHewg==
-  dependencies:
-    "@jspreadsheet/formula" "^1.3.0"
-    jsuites "^4.12.6"
-
-jsuites@^4.12.6:
-  version "4.13.5"
-  resolved "https://registry.yarnpkg.com/jsuites/-/jsuites-4.13.5.tgz#6eaa02ee86daef2b6b53ece11507d5d791de776c"
-  integrity sha512-QGHwH+mmRaeNfCuQbK3id8+u38pu9aG/V3VgYuRHuCKl9rPLwwv7VnM486y6A6wC+ADyQcE9IZyeedzSvkdbQA==
-
-jsuites@^4.14.0:
-  version "4.14.0"
-  resolved "https://registry.yarnpkg.com/jsuites/-/jsuites-4.14.0.tgz#70a9a30394178cf3fdbdbebd8ddd958325e9753a"
-  integrity sha512-j0jDSxHpb5TAm7Tt6xqTfjWxNa6q8KDjtyYw7R4r31RP7HW57J2yknHyvmrn6hrXG6c+C0yZsPJQ3ceS05fB1Q==
 
 levn@^0.4.1:
   version "0.4.1"
