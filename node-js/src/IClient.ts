@@ -25,8 +25,13 @@ export interface IClient {
 
   /**
    * List this user's spreadsheets.
+   * @param options
    */
-  listSpreadsheets(): Promise<
+  listSpreadsheets(options?: {
+    offset?: number;
+    limit?: number;
+    invitations?: boolean;
+  }): Promise<
     {
       sheet_guid: string;
       sheet_description: string;
@@ -35,4 +40,16 @@ export interface IClient {
       sheet_privacy: number;
     }[]
   >;
+
+  /**
+   * Generate a new access signature.
+   * @param token - Specific token for that route;
+   */
+  getNewSignature(token: string): Promise<string>;
+
+  /**
+   * Get the spreadsheet id with a guest token.
+   * @param token - Specific token for that route;
+   */
+  getSheetIdWithInvitation(token: string): Promise<string>;
 }

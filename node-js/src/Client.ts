@@ -71,7 +71,13 @@ const Client: IClientConstructor = class Client implements IClient {
     });
   }
 
-  listSpreadsheets() {
+  listSpreadsheets(
+    options: {
+      offset?: number;
+      limit?: number;
+      invitations?: boolean;
+    } = {}
+  ) {
     const headers: AxiosRequestHeaders = {};
 
     if (this.token) {
@@ -81,8 +87,49 @@ const Client: IClientConstructor = class Client implements IClient {
     return axiosRequisitionHandler(() =>
       axios.get(`${this.baseUrl}/list`, {
         headers,
+        params: options,
       })
     );
+  }
+
+  async getNewSignature(token: string) {
+    const headers: AxiosRequestHeaders = {};
+
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+
+    const result = await axiosRequisitionHandler(() =>
+      axios.get(`${this.baseUrl}/signature`, {
+        headers,
+      })
+    );
+
+    if (result.error) {
+      throw new Error(result.message);
+    }
+
+    return result.data.signature;
+  }
+
+  async getSheetIdWithInvitation(token: string) {
+    const headers: AxiosRequestHeaders = {};
+
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+
+    const result = await axiosRequisitionHandler(() =>
+      axios.get(`${this.baseUrl}/invitation`, {
+        headers,
+      })
+    );
+
+    if (result.error) {
+      throw new Error(result.message);
+    }
+
+    return result.data.sheet_id;
   }
 };
 

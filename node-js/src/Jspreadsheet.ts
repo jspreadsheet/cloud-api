@@ -69,6 +69,10 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     return axiosRequisitionHandler(() => this.axiosInstance.get(""));
   }
 
+  getAllConfig() {
+    return axiosRequisitionHandler(() => this.axiosInstance.get("/all"));
+  }
+
   async setConfig(
     config:
       | Partial<Worksheet>
@@ -940,6 +944,14 @@ const Jspreadsheet: IJspreadsheetConstructor = class Jspreadsheet
     await axiosRequisitionHandler(() =>
       this.axiosInstance.delete(`/history/${versionId}`)
     );
+  }
+
+  async getName() {
+    const result = await axiosRequisitionHandler(() =>
+      this.axiosInstance.get(`/name`)
+    );
+
+    return result.name;
   }
 
   setName(name?: string) {

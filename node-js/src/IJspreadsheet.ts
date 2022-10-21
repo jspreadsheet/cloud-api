@@ -88,9 +88,23 @@ export interface IJspreadsheet {
   setWorksheet(worksheetIndex: number): void;
 
   /**
-   * Get all the information from the spreadsheet.
+   * Get the information from the spreadsheet.
    */
   getConfig(): Promise<Spreadsheet>;
+
+  /**
+   * Get all the information from the spreadsheet and some control information.
+   */
+  getAllConfig(): Promise<{
+    sheet_guid: string;
+    sheet_id: string;
+    sheet_description: string;
+    sheet_privacy: number;
+    user_id: number;
+    config: Spreadsheet;
+    sheet_created: string;
+    sheet_updated: string;
+  }>;
 
   /**
    * Set up a worksheet configuration. Some properties are set in the spreadsheet.
@@ -614,6 +628,11 @@ export interface IJspreadsheet {
    * @param versionId - Version identifier.
    */
   deleteVersion(versionId: string): Promise<void>;
+
+  /**
+   * Get the name of the spreadsheet.
+   */
+  getName(): Promise<string>;
 
   /**
    * Rename spreadsheet.
